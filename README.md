@@ -1,7 +1,9 @@
 # State-of-the-Academy-2018
 The Phillipian's annual State of the Academy survey
 
-## Getting Started
+## Contributing
+
+### Getting Started
 
 To install all dependencies:
 
@@ -16,3 +18,7 @@ To start the server:
 ```
 gulp
 ```
+
+### License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more info.
