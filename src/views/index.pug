@@ -13,3 +13,65 @@ html(lang='en')
     script(src='bower_components/d3/d3.min.js')
     script(src='dist/script-min.js')
   body
+    #wrapper
+      header
+        img#logo(src = "assets/graphics/logo/dark.png") 
+        center
+          p.phillipian-name The Phillipian
+          h1 State of the Academy
+          h3 2018
+      #text
+        //TODO: make p have two columns
+        p Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32. The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.
+        a.button(href = "https://github.com/phillipian/State-of-the-Academy-2018" target = "_blank") See Source Code 
+        a.button.button-filled(href = "" target = "_blank") See Raw Data
+      #data
+        #sidebar
+          h2 State of the Academy 2018
+          hr
+          #general-nav.section-nav
+            a(href = "#general") General
+            ol.sub-nav(hidden)
+          #school-nav.section-nav
+            a(href = "#school") School
+            ol.sub-nav(hidden)
+          #politics-nav.section-nav
+            a(href = "#politics") Politics &amp; Worldview
+            ol.sub-nav(hidden)
+          #diversity-nav.section-nav
+            a(href = "#diversity") Diversity
+            ol.sub-nav(hidden)
+          #wellness-nav.section-nav
+            a(href = "#wellness") Wellness
+            ol.sub-nav(hidden)
+          #sex-nav.section-nav
+            a(href = "#sex") Sex
+            ol.sub-nav(hidden)
+          #drugs-nav.section-nav
+            a(href = "#drugs") Drugs
+            ol.sub-nav(hidden)
+          #discipline-nav.section-nav
+            a(href = "#discipline") Discipline
+            ol.sub-nav(hidden)
+        #sections
+          #general.section
+            h2 General
+          #school.section
+            h2 School
+          #politics.section
+            h2 Politics &amp; Worldview
+          #diversity.section
+            h2 Diversity
+          #wellness.section
+            h2 Wellness
+          #sex.section
+            h2 Sex
+          #drugs.section
+            h2 Drugs
+          #discipline.section
+            h2 Discipline
+      footer
+        .left
+          p State of the Academy 2016
+            br
+            | Website by Jeffrey Shen and Harvey Zheng, Graphics by Arno Min and Chris Ward
