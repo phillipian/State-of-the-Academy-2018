@@ -2,3 +2,10 @@
   theme.scss
   Contains all font and palette config
 */
+
+//Dotted hr
+hr{
+  border:none;
+  border-top:1px dotted white;
+  height:1px;
+}

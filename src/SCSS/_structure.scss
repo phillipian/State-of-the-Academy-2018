@@ -2,3 +2,75 @@
   structure.scss
   Layout of the webpage
 */
+
+// ** HEADER **
+header{
+  background: gray;
+  height: 70vh;
+  position: relative;
+
+  #logo{
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    width: 50px;
+  }
+
+  center{
+    top: 50%;
+    transform: translateY(-50%);
+    position: relative;
+  }
+}
+
+// ** DISCLAIMER TEXT BOX **
+#text{
+  padding: 80px 0;
+  p{
+    width: 80%;
+    margin: 0 auto;
+    columns: 2;
+  }
+
+  .buttons{
+    text-align: center;
+    .button{
+      border: 1px solid black;
+      padding: 10px 20px;
+
+      &:first-child{
+        margin-right: 5px;
+      }
+    }
+  }
+}
+
+// ** VISUALIZATION **
+#data{
+  background: gray;
+  position: relative;
+  width: 100vw;
+  padding: 80px 0;
+
+  //** SIDEBAR **
+  #sidebar{
+    position: absolute;
+    top: 80px;
+    left: 40px;
+    width: 15%;
+  }
+
+  // ** SECTIONS **
+  #sections{
+    margin-left: 20%;
+    width: 75%;
+    .section{
+
+    }
+  }
+}
+
+// ** FOOTER **
+footer{
+  padding: 20px;
+}
