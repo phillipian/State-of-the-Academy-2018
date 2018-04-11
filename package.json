@@ -18,6 +18,7 @@
   "homepage": "https://github.com/phillipian/State-of-the-Academy-2018#readme",
   "devDependencies": {
     "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.1",
     "gulp-minify": "^2.1.0",
     "gulp-pug": "^3.3.0",
     "gulp-sass": "^3.2.1",

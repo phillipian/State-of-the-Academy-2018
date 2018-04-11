@@ -3,11 +3,13 @@ var sass = require('gulp-sass');
 var pug = require('gulp-pug');
 var minify = require('gulp-minify');
 var webserver = require('gulp-webserver');
+var concat = require('gulp-concat');
 
 gulp.task('default', ['views', 'sass', 'compress', 'webserver'], function() {
   gulp.watch('src/SCSS/*.scss', ['sass']);
   gulp.watch('src/views/*.pug', ['views']);
   gulp.watch('src/JS/*.js', ['compress']);
+  gulp.watch('src/JS/components/*.js', ['compress']);
 });
 
 gulp.task('views', function buildHTML() {
@@ -23,7 +25,8 @@ gulp.task('sass', function () {
 });
 
 gulp.task('compress', function() {
-  gulp.src('src/JS/*.js')
+  gulp.src(["src/JS/*.js", 'src/JS/components/*.js'])
+  .pipe(concat('script.js'))
     .pipe(minify({}))
     .pipe(gulp.dest('dist'));
 });
