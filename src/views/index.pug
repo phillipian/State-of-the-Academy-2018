@@ -13,11 +13,12 @@ html(lang='en')
     script(src='bower_components/d3/d3.min.js')
     script(src='dist/script-min.js')
   body
+    include components/percentage-slider.pug
     #wrapper
       header
-        img#logo(src = "assets/graphics/logo/dark.png") 
+        img#logo(src = "assets/graphics/logo/light.png") 
         center
-          p.phillipian-name The Phillipian
+          h2.phillipian-name The Phillipian
           h1 State of the Academy
           h3 2018
       #text
@@ -26,11 +27,11 @@ html(lang='en')
         br
         br
         .buttons
-          a.button(href = "https://github.com/phillipian/State-of-the-Academy-2018" target = "_blank") See Source Code 
+          a.button(href = "https://github.com/phillipian/State-of-the-Academy-2018" target = "_blank") Source Code
           a.button.button-filled(href = "" target = "_blank") See Raw Data
       #data
         #sidebar
-          h2 State of the Academy 2018
+          h2.phillipian-name State of the Academy 2018
           hr
           #general-nav.section-nav
             a(href = "#general") General
@@ -60,6 +61,10 @@ html(lang='en')
           #general.section
             h2 General
             hr
+            p Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. 
+            br
+            h3 Yes or No Question
+            +percentage_slider("yes_or_no", 50)
           #school.section
             h2 School
             hr
@@ -82,6 +87,6 @@ html(lang='en')
             h2 Discipline
       footer
         .left
-          p State of the Academy 2016
+          p <strong>State of the Academy 2018</strong>
             br
             | Website by Jeffrey Shen and Harvey Zheng, Graphics by Arno Min and Chris Ward

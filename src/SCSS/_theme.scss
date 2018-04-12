@@ -3,6 +3,56 @@
   Contains all font and palette config
 */
 
+// ** PALETTE **
+$white: #ecf0f1;
+$black: #2c3e50;
+$blue: #2980b9;
+
+// ** FONTS **
+@font-face{
+  font-family: "gotham_bold";
+  src: url("../../assets/fonts/Gotham\ Bold/Gotham\ Bold.otf");
+}
+
+@font-face{
+  font-family: "source_sans_pro";
+  src: url("../../assets/fonts/Source_Sans_Pro/SourceSansPro-Regular.ttf");
+}
+
+@font-face{
+  font-family: "source_sans_pro";
+  font-style: italic;
+  src: url("../../assets/fonts/Source_Sans_Pro/SourceSansPro-Italic.ttf");
+}
+
+@font-face{
+  font-family: "source_sans_pro";
+  font-weight: bold;
+  src: url("../../assets/fonts/Source_Sans_Pro/SourceSansPro-Bold.ttf");
+}
+
+// ** General text styles **
+p, a{
+  font-family: source_sans_pro;
+}
+
+strong{
+  font-weight: bold;
+}
+
+a{ //TODO: add a hover color for a
+  text-decoration: none;
+}
+
+p{
+  color: $black;
+}
+
+.phillipian-name{
+  font-family: "Georgia";
+  font-weight: bold;
+}
+
 //Dotted hr
 hr{
   border:none;

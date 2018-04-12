@@ -2,3 +2,19 @@
   components.scss
   Styling for all graphs, visualizations, and other components
 */
+
+.percentage-slider{
+  width: 100%;
+  .left, .right{
+    p{
+      display: inline-block;
+      font-family: "gotham_bold";
+    }
+  }
+  .left{
+    background: white;
+  }
+  .right{
+    background: blue;
+  }
+}

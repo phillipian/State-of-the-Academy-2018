@@ -20,6 +20,39 @@ header{
     top: 50%;
     transform: translateY(-50%);
     position: relative;
+    color: $white;
+
+    h2{
+      font-size: 2em;
+      margin-bottom: 5px;
+    }
+    h1{
+      font-family: "gotham_bold";
+      font-size: 3.5em;
+    }
+    h3{
+      font-family: "Georgia";
+      font-size: 2em;
+      &:before, &:after {
+        background-color: $white;
+        content: "";
+        display: inline-block;
+        height: 1px;
+        position: relative;
+        vertical-align: middle;
+        width: 10%;
+      }
+
+      &:before {
+        right: 0.5em;
+        margin-left: -50%;
+      }
+
+      &:after {
+        left: 0.5em;
+        margin-right: -50%;
+      }
+    }
   }
 }
 
@@ -35,12 +68,19 @@ header{
   .buttons{
     text-align: center;
     .button{
-      border: 1px solid black;
+      border: 2px solid $black;
+      color: $black;
       padding: 10px 20px;
+      font-family: "gotham_bold";
 
       &:first-child{
         margin-right: 5px;
       }
+    }
+    .button-filled{
+      color: $white;
+      background: $blue;
+      border-color: $blue;
     }
   }
 }
@@ -58,6 +98,19 @@ header{
     top: 80px;
     left: 40px;
     width: 15%;
+    color: $white;
+
+    h2{  //TODO: Make this a different color
+      font-size: 1.25em;
+    }
+
+    .section-nav{
+      a{
+        color: $white;
+        font-size: 1.1em;
+      }
+      margin-bottom: 10px;
+    }
   }
 
   // ** SECTIONS **
@@ -65,7 +118,19 @@ header{
     margin-left: 20%;
     width: 75%;
     .section{
+      h2, h3{
+        font-family: "gotham_bold";
+      }
 
+      h2{
+        font-size: 1.75em;
+      }
+
+      h3{
+        font-size: 1.4em;
+      }
+
+      margin-bottom: 20px;
     }
   }
 }
