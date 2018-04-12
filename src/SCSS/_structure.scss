@@ -87,7 +87,7 @@ header{
 
 // ** VISUALIZATION **
 #data{
-  background: gray;
+  background: #ECECEC;
   position: relative;
   width: 100vw;
   padding: 80px 0;
@@ -98,7 +98,7 @@ header{
     top: 80px;
     left: 40px;
     width: 15%;
-    color: $white;
+    color: #6C7A89;
 
     h2{  //TODO: Make this a different color
       font-size: 1.25em;
@@ -106,7 +106,7 @@ header{
 
     .section-nav{
       a{
-        color: $white;
+        color: #6C7A89;
         font-size: 1.1em;
       }
       margin-bottom: 10px;
@@ -120,6 +120,7 @@ header{
     .section{
       h2, h3{
         font-family: "gotham_bold";
+        color: $black;
       }
 
       h2{

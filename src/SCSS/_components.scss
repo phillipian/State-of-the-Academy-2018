@@ -5,16 +5,17 @@
 
 .percentage-slider{
   width: 100%;
+  box-sizing: border-box;
+  margin-top: 10px;
   .left, .right{
-    p{
-      display: inline-block;
-      font-family: "gotham_bold";
-    }
+    padding: 20px 0;
+    box-sizing: border-box;
+    display: inline-block;
+    font-family: "gotham_bold";
+    text-align: center;
+    color: $black;
   }
   .left{
     background: white;
-  }
-  .right{
-    background: blue;
   }
 }

@@ -1,1 +1,1 @@
-d3.selectAll(".percentage-slider");
+console.log(d3.selectAll(".percentage-slider").attr("width"));
