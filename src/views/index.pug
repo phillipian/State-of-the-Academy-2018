@@ -9,8 +9,6 @@ html(lang='en')
     title The State of the Academy 2018
     link(href='bower_components/font-awesome/web-fonts-with-css/css/fontawesome-all.min.css' rel='stylesheet' type='text/css')
     link(href='dist/CSS/main.css', rel='stylesheet', type='text/css')
-    script(src='bower_components/jquery/dist/jquery.min.js')
-    script(src='bower_components/d3/d3.min.js')
   body
     include components/percentage-slider.pug
     #wrapper
@@ -57,14 +55,14 @@ html(lang='en')
             a(href = "#discipline") Discipline
             ol.sub-nav(hidden)
         #sections
-          -var accent_color = "#3498db"
+          -var accent_color = "#74b9ff"
           #general.section
             h2 General
             hr
             p Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. 
             br
             h3 Yes or No Question
-            +percentage_slider("yes_or_no", 1000, 50, accent_color)
+            +percentage_slider("yes_or_no", 1000, 200, accent_color)
           #school.section
             h2 School
             hr
@@ -90,4 +88,6 @@ html(lang='en')
           p <strong>State of the Academy 2018</strong>
             br
             | Website by Jeffrey Shen and Harvey Zheng, Graphics by Arno Min and Chris Ward
+    script(src='bower_components/jquery/dist/jquery.min.js')
+    script(src='bower_components/d3/d3.min.js')
     script(src='dist/script-min.js')

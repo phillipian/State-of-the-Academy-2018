@@ -1,9 +1,3 @@
-//Returns an html string for the tooltip
-function generateTooltip(json){
-  return "<h4>" + json.title + "</h4><p>Responses: <strong>" + json.responses + "</strong><br>Percentage: <strong>" + (json.percentage * 100).toFixed(1) + "%</strong></p>";
-}
-
-
 /*
   Percentage Slider
 */
@@ -40,7 +34,3 @@ var percentageSliders = d3.selectAll(".percentage-slider").each(function(){
       tooltip.classed("hidden", true);
     });
 });
-
-/*
-  Pie Chart
-*/

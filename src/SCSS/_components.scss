@@ -3,12 +3,61 @@
   Styling for all graphs, visualizations, and other components
 */
 
+// ** TOOLTIPS **
+.tooltip{
+  position: absolute;
+  display: block;
+  box-sizing: border-box;
+
+  h4{
+    font-family: "gotham_bold";
+  }
+  p{
+    font-size: 0.9em;
+  }
+
+  &:after, &:before {
+  	top: 100%;
+  	left: 50%;
+  	border: solid transparent;
+  	content: " ";
+  	height: 0;
+  	width: 0;
+  	position: absolute;
+  	pointer-events: none;
+  }
+
+  &:after {
+  	border-color: rgba(255, 255, 255, 0);
+  	border-top-color: #ffffff;
+  	border-width: 10px;
+  	margin-left: -10px;
+  }
+  &:before {
+  	border-color: rgba(245, 0, 0, 0);
+  	border-top-color: $black;
+  	border-width: 11px;
+  	margin-left: -11px;
+  }
+
+  border: 1px solid $black;
+  background: white;
+  padding: 5px;
+  transition: 0.2s all;
+}
+
+.hidden{
+  display: none;
+}
+
+// ** PERCENTAGE SLIDER **
 .percentage-slider{
   width: 100%;
   box-sizing: border-box;
   margin-top: 10px;
+  position: relative;
   .left, .right{
-    padding: 20px 0;
+    padding: 15px 0;
     box-sizing: border-box;
     display: inline-block;
     font-family: "gotham_bold";

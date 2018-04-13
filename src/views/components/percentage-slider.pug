@@ -1,8 +1,8 @@
 mixin percentage_slider(id, yes_responses, no_responses, accent_color) 
   div(id = id class = "percentage-slider" data-yes = yes_responses data-no = no_responses)
+    .tooltip.hidden
     - var width = 100 * yes_responses / (yes_responses + no_responses)
     .left(style = "width:" + width + "%;") YES
     .right(style = "width:" + (100 - width) + "%;background:" + accent_color + ";") NO
     
-    
-//TODO: add tooltip to percentage slider
+  
