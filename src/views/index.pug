@@ -11,6 +11,7 @@ html(lang='en')
     link(href='dist/CSS/main.css', rel='stylesheet', type='text/css')
   body
     include components/percentage-slider.pug
+    include components/us-map.pug
     #wrapper
       header
         img#logo(src = "assets/graphics/logo/light.png") 
@@ -63,6 +64,9 @@ html(lang='en')
             br
             h3 Yes or No Question
             +percentage_slider("yes_or_no", 1000, 200, accent_color)
+            br
+            h3 Map
+            +us_map("us_map", "/assets/graphics/map.svg")
           #school.section
             h2 School
             hr
@@ -90,4 +94,5 @@ html(lang='en')
             | Website by Jeffrey Shen and Harvey Zheng, Graphics by Arno Min and Chris Ward
     script(src='bower_components/jquery/dist/jquery.min.js')
     script(src='bower_components/d3/d3.min.js')
+    //script(src='dist/script.js')
     script(src='dist/script-min.js')
