@@ -8,3 +8,4 @@
 - [ ] Text data
 - [ ] Line graph
 - [ ] Bar charts
+- [ ] Collated bar charts 
