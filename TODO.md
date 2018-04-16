@@ -3,5 +3,8 @@
 - [ ] Responsiveness
 - [ ] Get domain and hosting set up
 - [ ] Cover photo
-- [ ] Build all the graph elements
 - [ ] Fix the colors and the way the site looks
+- [ ] Stacked line chart
+- [ ] Text data
+- [ ] Line graph
+- [ ] Bar charts
