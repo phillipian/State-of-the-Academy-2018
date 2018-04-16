@@ -3,4 +3,5 @@
 - [ ] Responsiveness
 - [ ] Get domain set up
 - [ ] Cover photo
-- [ ] Build all the graph elements 
+- [ ] Build all the graph elements
+- [ ] Fix the colors and the way the site looks
