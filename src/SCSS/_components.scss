@@ -51,6 +51,24 @@
   display: none;
 }
 
+// ** BUBBLE LABELS **
+.bubble{
+  border-radius: 100%;
+  width: 10px;
+  height: 10px;
+  margin-right: 5px;
+  display: inline-block;
+}
+
+// ** PIE CHART **
+.pie{
+  width: 300px;
+  position: relative;
+  .tooltip{
+    transition: none;
+  }
+}
+
 // ** PERCENTAGE SLIDER **
 .percentage-slider{
   width: 100%;
@@ -79,35 +97,34 @@
   .tooltip{
     transition: none;
   }
-}
+  svg{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: block;
+    margin: 0px auto;
+    stroke: $black;
+    path{
+      fill: #81ecec;
+      &:nth-child(1){
+        fill: #74b9ff;
+      }
+      &:nth-child(2){
+        fill: #a29bfe;
+      }
+      &:nth-child(3){
+        fill: #e17055;
+      }
+      &:nth-child(4){
+        fill: #fdcb6e;
+      }
+      &:nth-child(5){
+        fill: #00b894;
+      }
+    }
 
-svg{
-  position: relative;
-  width: 100%;
-  height: 100%;
-  display: block;
-  margin: 0px auto;
-  stroke: $black;
-  path{
-    fill: #81ecec;
-    &:nth-child(1){
-      fill: #74b9ff;
+    circle{
+      fill: #6c5ce7;
     }
-    &:nth-child(2){
-      fill: #a29bfe;
-    }
-    &:nth-child(3){
-      fill: #e17055;
-    }
-    &:nth-child(4){
-      fill: #fdcb6e;
-    }
-    &:nth-child(5){
-      fill: #00b894;
-    }
-  }
-
-  circle{
-    fill: #6c5ce7;
   }
 }
