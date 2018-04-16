@@ -8,4 +8,5 @@
 - [ ] Text data
 - [ ] Line graph
 - [ ] Bar charts
-- [ ] Collated bar charts 
+- [ ] Collated bar charts
+- [ ] Add photo credit to cover photo
