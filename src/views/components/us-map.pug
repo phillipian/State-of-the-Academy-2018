@@ -1,5 +1,4 @@
-mixin us_map(id, url) 
-  div(id = id class = "map" data-url = url)
-    //.tooltip.hidden
-    //- var width = 100 * yes_responses / (yes_responses + no_responses)
+mixin us_map(id, url, answers) 
+  div(id = id class = "map" data-url = url data-responses = answers)
+    .tooltip.hidden
   

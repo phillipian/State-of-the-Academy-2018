@@ -8,6 +8,7 @@
   position: absolute;
   display: block;
   box-sizing: border-box;
+  z-index: 50;
 
   h4{
     font-family: "gotham_bold";
@@ -70,9 +71,43 @@
 }
 
 // ** SVG map **
-svg{
+.map{
+  position: relative;
   width: 80%;
   height: 80%;
+  margin: 0 auto;
+  .tooltip{
+    transition: none;
+  }
+}
+
+svg{
+  position: relative;
+  width: 100%;
+  height: 100%;
   display: block;
-  margin: 20px auto;
+  margin: 0px auto;
+  stroke: $black;
+  path{
+    fill: #81ecec;
+    &:nth-child(1){
+      fill: #74b9ff;
+    }
+    &:nth-child(2){
+      fill: #a29bfe;
+    }
+    &:nth-child(3){
+      fill: #e17055;
+    }
+    &:nth-child(4){
+      fill: #fdcb6e;
+    }
+    &:nth-child(5){
+      fill: #00b894;
+    }
+  }
+
+  circle{
+    fill: #6c5ce7;
+  }
 }

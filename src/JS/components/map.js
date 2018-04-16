@@ -2,54 +2,49 @@
   US Map
 */
 
-/*d3.selectAll(".map").each(function(){
+d3.selectAll(".map").each(function(){
+  //TODO: reorganize these variables
   var url = this.dataset.url;
-  var currentElement = this;
-
-  d3.xml(url, "image/svg+xml", function(xml) {
-    currentElement.appendChild(xml.documentElement);
-    //styleImportedSVG();
+  var total = 0;
+  var regionNames = ["Discontinuous", "Northeast", "Southeast", "Southwest", "West", "Midwest", "International"];
+  var responses = this.dataset.responses.split(",").map(function(element, i){
+    total += parseInt(element);
+    return {
+      responses: parseInt(element),
+      name: regionNames[i]
+    };
   });
-});*/
 
-d3.svg("/assets/graphics/map.svg").then(function(res){
-  var svg = res.documentElement;
-  d3.select("#us_map").node().appendChild(svg);
-});
-
-/*.get(function(error, xml) {
-  //if (error) throw error;
-
-});
-
-
-/*
-
-  var htmlYes = generateTooltip({title: "Yes", responses: yesResponses, percentage: yesResponses / (yesResponses + noResponses)}),
-      htmlNo = generateTooltip({title: "No", responses: noResponses, percentage: noResponses / (yesResponses + noResponses)});
-
+  var currentElement = this;
+  var tooltipText;
   var tooltip = d3.select(this.firstChild);
 
-  var yesX = parseInt(d3.select(this.children[1]).node().style.width.replace("%", ""));
-  var noX = parseInt(d3.select(this.children[2]).node().style.width.replace("%", ""));
+  d3.svg(url).then(function(res){
+    var svg = res.documentElement;
+    d3.select(currentElement).node().appendChild(svg);
+    d3.select(svg).selectAll("*")
+      .data(responses)
+      .on("mouseover", function(d, i){
+        tooltipText = generateTooltip({title: d.name, responses: d.responses, percentage: d.responses / total});
+        tooltip.classed("hidden", false).html(tooltipText);
 
-  d3.select(this.children[1]) //If hovering over yes
-    .on("mouseover", function(d){
-      tooltip.classed("hidden", false).html(htmlYes)
-        .style("left", "calc(" + Math.round(yesX / 2) + "% - " + Math.round(tooltip.node().offsetWidth / 2) + "px)")
-        .style("top", "-" + (Math.round(tooltip.node().offsetHeight) + 10) + "px");
-    })
-    .on("mouseout", function(d){
-      tooltip.classed("hidden", true);
-    });
+        console.log(d3.select(currentElement).node().getBoundingClientRect());
 
-  d3.select(this.children[2]) //If hovering over no
-    .on("mouseover", function(d){
-      tooltip.classed("hidden", false).html(htmlNo)
-        .style("left", "calc(" + Math.round(yesX + noX / 2) + "% - " + Math.round(tooltip.node().offsetWidth / 2) + "px)")
-        .style("top", "-" + (Math.round(tooltip.node().offsetHeight) + 10) + "px");
-    })
-    .on("mouseout", function(d){
-      tooltip.classed("hidden", true);
-    });
-});*/
+        var bbox = d3.select(currentElement).node().getBoundingClientRect();
+        var mouse = d3.mouse(this);
+
+        ///tooltip.style("left", mouse[0] - bbox.x + "px")
+          //.style("top", mouse[1] - bbox.y + "px");
+      })
+      .on("mousemove", function(d){
+        var bbox = d3.select(currentElement).node().getBoundingClientRect();
+        var mouse = d3.mouse(currentElement);
+
+        tooltip.style("left", mouse[0] - Math.round(tooltip.node().offsetWidth / 2) + "px")
+          .style("top", mouse[1] - Math.round(tooltip.node().offsetHeight) - 10 + "px");
+      })
+      .on("mouseout", function(d){
+        tooltip.classed("hidden", true);
+      });
+  });
+});
