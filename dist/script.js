@@ -1,7 +1,21 @@
 //Returns an html string for the tooltip
-function generateTooltip(json){
+function generateTooltip(json) {
   return "<h4>" + json.title + "</h4><p>Responses: <strong>" + json.responses + "</strong><br>Percentage: <strong>" + (json.percentage * 100).toFixed(1) + "%</strong></p>";
 }
+
+$(document).ready(function(){
+  $("#sidebar a").on('click', function(event) {
+    if (this.hash !== "") {
+      event.preventDefault();
+      var hash = this.hash;
+      $('html, body').animate({
+        scrollTop: $(hash).offset().top
+      }, 800, function(){
+        window.location.hash = hash;
+      });
+    } 
+  });
+});
 
 
 /*
