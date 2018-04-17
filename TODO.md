@@ -1,5 +1,4 @@
 # To-Do
-- [ ] Snap scrolling on the data
 - [ ] Responsiveness
 - [ ] Get domain and hosting set up
 - [ ] Cover photo
