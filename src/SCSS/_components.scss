@@ -62,6 +62,7 @@
 
 // ** PIE CHART **
 .pie{
+  margin: 20px 0 0 0;
   width: 300px;
   position: relative;
   .tooltip{
@@ -88,12 +89,30 @@
   }
 }
 
+// ** TEXT FACT **
+.text_fact{
+  display: inline-block;
+  margin: 20px 30px 40px 0;
+
+  h4{
+    font-family: "gotham_bold";
+    font-size: 3.5em;
+    margin: 0;
+  }
+  p{
+    margin: 0;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 1.1em;
+  }
+}
+
 // ** SVG map **
 .map{
   position: relative;
   width: 80%;
   height: 80%;
-  margin: 0 auto;
+  margin: 20px auto;
   .tooltip{
     transition: none;
   }

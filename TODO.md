@@ -5,7 +5,6 @@
 - [ ] Cover photo
 - [ ] Fix the colors and the way the site looks
 - [ ] Stacked line chart
-- [ ] Text data
 - [ ] Line graph
 - [ ] Bar charts
 - [ ] Collated bar charts
