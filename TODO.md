@@ -7,4 +7,3 @@
 - [ ] Line graph
 - [ ] Bar charts
 - [ ] Collated bar charts
-- [ ] Add photo credit to cover photo
