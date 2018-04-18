@@ -10,14 +10,38 @@
 // ** HEADER **
 header{
   background: gray;
-  height: 70vh;
+  height: 80vh;
   position: relative;
+
+  #background{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: $black;
+    opacity: 0.3;
+    z-index: 50;
+  }
+
+  #img{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("../../assets/graphics/mcallahan.campus.03.jpg");
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+  }
 
   #logo{
     position: absolute;
     top: 15px;
     left: 15px;
     width: 50px;
+    z-index: 100;
   }
 
   center{
@@ -25,6 +49,7 @@ header{
     transform: translateY(-50%);
     position: relative;
     color: $white;
+    z-index: 100;
 
     h2{
       font-size: 2em;
@@ -60,9 +85,17 @@ header{
   }
 }
 
+//Photo credits
+.caption{
+  text-align: right;
+  padding: 5px;
+  font-family: georgia;
+  margin: 0;
+}
+
 // ** DISCLAIMER TEXT BOX **
 #text{
-  padding: 80px 0;
+  padding: 70px 0;
   p{
     width: 80%;
     margin: 0 auto;
