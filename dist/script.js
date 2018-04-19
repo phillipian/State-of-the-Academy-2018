@@ -195,6 +195,8 @@ d3.selectAll(".map").each(function(){
   var total = 0,
       regionNames = ["Discontinuous", "Northeast", "Southeast", "Southwest", "West", "Midwest", "International"];
 
+  var accent = d3.color(this.dataset.accent);
+
   var responses = this.dataset.responses.split(",").map(function(element, i){
     total += parseInt(element);
     return {
@@ -202,6 +204,20 @@ d3.selectAll(".map").each(function(){
       name: regionNames[i]
     };
   });
+
+  var colorSort = responses.slice().sort(function(a, b) {
+    return a.responses - b.responses;
+  });
+
+  responses = responses.map(function(element, i){
+    return {
+      responses: element.responses,
+      name: element.name,
+      color: d3.color(accent.darker(0.4 * colorSort.indexOf(element)))
+    };
+  });
+
+  console.log(responses);
 
   var currentElement = this,
       tooltipText,
@@ -212,6 +228,9 @@ d3.selectAll(".map").each(function(){
     d3.select(currentElement).node().appendChild(svg);
     d3.select(svg).selectAll("*")
       .data(responses)
+      .style("fill", function(d, i){
+        return d3.rgb(d.color);
+      })
       .on("mouseover", function(d, i){
         tooltipText = generateTooltip({title: d.name, responses: d.responses, percentage: d.responses / total});
         tooltip.classed("hidden", false).html(tooltipText);
