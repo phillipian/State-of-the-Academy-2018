@@ -14,6 +14,7 @@ html(lang='en')
     include components/us-map.pug
     include components/piechart.pug
     include components/text-fact.pug
+    include components/line-chart.pug
     #wrapper
       header
         #background
@@ -83,6 +84,9 @@ html(lang='en')
             hr
           #school.section
             h2 School
+            br
+            h3 Line Chart
+            +line_chart("chart", accent_color, 300, "x-label", "y-label", "/assets/data/line_chart.csv")
             hr
           #politics.section
             h2 Politics &amp; Worldview
