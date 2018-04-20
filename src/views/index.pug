@@ -87,7 +87,9 @@ html(lang='en')
             h2 School
             br
             h3 Line Chart
-            +line_chart("chart", accent_color, 300, "x-label", "y-label", "/assets/data/line_chart.csv")
+            +line_chart("chart", accent_color, 300, "x-label", "y-label", "/assets/data/line_chart.csv", "false")
+            h3 Scatter Plot
+            +line_chart("chart", accent_color, 300, "x-label", "y-label", "/assets/data/line_chart.csv", "true")
             hr
           #politics.section
             h2 Politics &amp; Worldview

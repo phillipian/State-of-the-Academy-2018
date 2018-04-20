@@ -66,12 +66,12 @@ d3.select(window).on('resize', function(){
       var thisNode = d3.select(this),
           width = thisNode.node().offsetWidth - margin.left - margin.right,
           height = parseInt(this.dataset.height) - margin.top - margin.bottom;
-      drawGraph(thisNode, dataForGraphs[i], totalForGraphs[i], width, height, this.dataset.accent, d3.select(this.firstChild), bisectors[i], this.dataset.x, this.dataset.y);
+      drawGraph(thisNode, dataForGraphs[i], totalForGraphs[i], width, height, this.dataset.accent, d3.select(this.firstChild), bisectors[i], this.dataset.x, this.dataset.y, this.dataset.scatter);
     });
   }, 500);
 });
 
-function drawGraph(thisNode, data, total, width, height, accent, tooltip, bisector, xLabel, yLabel){
+function drawGraph(thisNode, data, total, width, height, accent, tooltip, bisector, xLabel, yLabel, scatter){
   var x = d3.scaleLinear().range([0, width]);
   var y = d3.scaleLinear().range([height, 0]);
   var tooltipText;
@@ -115,13 +115,15 @@ function drawGraph(thisNode, data, total, width, height, accent, tooltip, bisect
   y.domain([0, d3.max(data, function(d) { return d.y; })]);
 
   // Add the line path.
-  svg.append("path")
-    .data([data])
-    .attr("class", "line")
-    .style("stroke", accent)
-    .style("stroke-width", "2px")
-    .style("fill", "none")
-    .attr("d", line);
+  if(scatter == "false"){
+    svg.append("path")
+      .data([data])
+      .attr("class", "line")
+      .style("stroke", accent)
+      .style("stroke-width", "2px")
+      .style("fill", "none")
+      .attr("d", line);
+  }
 
   //Add circles for each data point
   svg.selectAll(".dot")
@@ -200,7 +202,7 @@ d3.selectAll(".line_chart").each(function(){
       var width = thisNode.node().offsetWidth - margin.left - margin.right,
           height = parseInt(currentElement.dataset.height) - margin.top - margin.bottom;
 
-      drawGraph(thisNode, data, total, width, height, accent, tooltip, bisector, xLabel, yLabel);
+      drawGraph(thisNode, data, total, width, height, accent, tooltip, bisector, xLabel, yLabel, currentElement.dataset.scatter);
     },
     dataType: "text"
   });
