@@ -19,13 +19,32 @@ $(document).ready(function(){
 
   //Snap scrolling
   $(document).scroll(function() {
-    if($(document).scrollTop() + 60 > $("#sections").offset().top){
-      $("#sidebar").css("position", "fixed");
-      $("#sidebar").css("top", "40px");
+    if($(document).width() > 900){
+      if($(document).scrollTop() + 60 > $("#sections").offset().top){
+        $("#sidebar").css("position", "fixed");
+        $("#sidebar").css("top", "40px");
+      }
+      else{
+        $("#sidebar").css("position", "absolute");
+        $("#sidebar").css("top", "80px");
+      }
+    }
+  });
+
+  $(window).resize(function(){
+    if($(document).width() > 900){
+      if($(document).scrollTop() + 60 > $("#sections").offset().top){
+        $("#sidebar").css("position", "fixed");
+        $("#sidebar").css("top", "40px");
+      }
+      else{
+        $("#sidebar").css("position", "absolute");
+        $("#sidebar").css("top", "80px");
+      }
     }
     else{
-      $("#sidebar").css("position", "absolute");
-      $("#sidebar").css("top", "80px");
+      $("#sidebar").css("position", "relative");
+      $("#sidebar").css("top", "0px");
     }
   });
 });
