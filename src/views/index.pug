@@ -83,13 +83,16 @@ html(lang='en')
             h3 Map
             +us_map("us_map", "/assets/graphics/map.svg", "1,2,3,4,5,6,7", accent_color)
             hr
+          -var accent_color = "#a29bfe"
           #school.section
             h2 School
             br
             h3 Line Chart
-            +line_chart("chart", accent_color, 300, "x-label", "y-label", "/assets/data/line_chart.csv", "false")
+            +line_chart("chart", accent_color, 300, "x-label", "y-label", "/assets/data/line_chart.csv", "false", 1)
             h3 Scatter Plot
-            +line_chart("chart", accent_color, 300, "x-label", "y-label", "/assets/data/line_chart.csv", "true")
+            +line_chart("chart", accent_color, 300, "x-label", "y-label", "/assets/data/line_chart.csv", "true", 1)
+            h3 Multiline Chart 
+            +line_chart("chart", accent_color, 300, "x-label", "y-label", "/assets/data/line_chart_1.csv", "false", 2, "line 1,line2")
             hr
           #politics.section
             h2 Politics &amp; Worldview

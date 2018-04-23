@@ -64,6 +64,13 @@
 .line_chart{
   width: 100%;
   position: relative;
+  .line-label{
+    text-align: center;
+    p{
+      display: inline;
+      margin-right: 5px;
+    }
+  }
 }
 
 // ** PIE CHART **

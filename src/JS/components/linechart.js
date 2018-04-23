@@ -1,11 +1,12 @@
 /*
   Line Chart
 */
-
 var margin = {top: 20, right: 20, bottom: 50, left: 50};
 var dataForGraphs = [],
     totalForGraphs = [],
-    bisectors = [];
+    bisectors = [],
+    colorsForGraphs = [],
+    numLinesGraphs = [];
 
 var resizeId;
 d3.select(window).on('resize', function(){
@@ -14,24 +15,37 @@ d3.select(window).on('resize', function(){
       var thisNode = d3.select(this),
           width = thisNode.node().offsetWidth - margin.left - margin.right,
           height = parseInt(this.dataset.height) - margin.top - margin.bottom;
-      drawGraph(thisNode, dataForGraphs[i], totalForGraphs[i], width, height, this.dataset.accent, d3.select(this.firstChild), bisectors[i], this.dataset.x, this.dataset.y, this.dataset.scatter);
+      drawGraph(thisNode, dataForGraphs[i], totalForGraphs[i], width, height, this.dataset.accent, d3.select(this.firstChild), bisectors[i], this.dataset.x, this.dataset.y, this.dataset.scatter, numLinesGraphs[i], colorsForGraphs[i]);
     });
   }, 500);
 });
 
-function drawGraph(thisNode, data, total, width, height, accent, tooltip, bisector, xLabel, yLabel, scatter){
+function drawGraph(thisNode, data, total, width, height, accent, tooltip, bisector, xLabel, yLabel, scatter, numLines, colors){
   var x = d3.scaleLinear().range([0, width]);
   var y = d3.scaleLinear().range([height, 0]);
   var tooltipText;
 
   //Create the line
-  var line = d3.line()
-    .x(function(d){ return x(d.x); })
-    .y(function(d){ return y(d.y); });
+  var lines = [],
+      line;
 
-  thisNode.select('svg').remove();
+  for(var i = 0; i < numLines; i++){
+    line = d3.line()
+      .x(function(d){ return x(d.x); })
+      .y(function(d){ return y(d.y[i]); });
 
-  var svg = thisNode.append("svg")
+    lines.push(line);
+  }
+
+  thisNode.select('svg').selectAll("*").remove();
+
+  var yBisector;
+
+  if(numLines > 1){
+    yBisector = d3.bisector(function(d) { return d.x; }).right
+  }
+
+  var svg = thisNode.select("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
     .on("mousemove", function(){
@@ -60,28 +74,30 @@ function drawGraph(thisNode, data, total, width, height, accent, tooltip, bisect
       xRange = xExtent[1] - xExtent[0];
 
   x.domain([xExtent[0] - (xRange * 0.05), xExtent[1] + (xRange * 0.05)]);
-  y.domain([0, d3.max(data, function(d) { return d.y; })]);
+  y.domain([0, d3.max(data, function(d) { return d3.max(d.y); })]); //TODO: Replace d.y with Math.max of all ys
 
-  // Add the line path.
-  if(scatter == "false"){
-    svg.append("path")
-      .data([data])
-      .attr("class", "line")
-      .style("stroke", accent)
-      .style("stroke-width", "2px")
-      .style("fill", "none")
-      .attr("d", line);
+  for(var i = 0; i < numLines; i++){
+    // Add the line path.
+    if(scatter == "false"){
+      svg.append("path")
+        .data([data])
+        .attr("class", "line")
+        .style("stroke", colors[i])
+        .style("stroke-width", "2px")
+        .style("fill", "none")
+        .attr("d", lines[i]);
+    }
+
+    //Add circles for each data point
+    svg.selectAll(".dot-" + i)
+      .data(data)
+      .enter().append("circle")
+      .attr("class", "dot-" + i)
+      .style("fill", colors[i])
+      .attr("cx", function(d){return x(d.x);})
+      .attr("cy", function(d){return y(d.y[i]);})
+      .attr("r", 5);
   }
-
-  //Add circles for each data point
-  svg.selectAll(".dot")
-    .data(data)
-    .enter().append("circle")
-    .attr("class", "dot")
-    .style("fill", accent)
-    .attr("cx", function(d){return x(d.x);})
-    .attr("cy", function(d){return y(d.y);})
-    .attr("r", 5);
 
   //Add the X Axis
   svg.append("g")
@@ -115,16 +131,20 @@ function drawGraph(thisNode, data, total, width, height, accent, tooltip, bisect
 }
 
 d3.selectAll(".line_chart").each(function(){
-  var accent = this.dataset.accent,
+  var accent = d3.color(this.dataset.accent),
       thisNode = d3.select(this),
       currentElement = this,
       csv = this.dataset.csv,
       xLabel = this.dataset.x,
       yLabel = this.dataset.y,
-      tooltip = d3.select(this.firstChild);
+      tooltip = d3.select(this.firstChild),
+      numLines = this.dataset.lines;
 
   var data = [],
       total = 0;
+
+  var colors = [];
+  for(var i = 0; i < numLines; i++) colors.push(d3.color(accent.darker(i)));
 
   $.ajax({
     url: csv,
@@ -136,7 +156,9 @@ d3.selectAll(".line_chart").each(function(){
           total += parseInt(temp[1]);
           data.push({
             x: parseInt(temp[0]),
-            y: parseInt(temp[1])
+            y: temp.slice(1).map(function(element){
+              return parseInt(element)
+            })
           });
         }
       });
@@ -146,11 +168,27 @@ d3.selectAll(".line_chart").each(function(){
       dataForGraphs.push(data);
       totalForGraphs.push(total);
       bisectors.push(bisector);
+      numLinesGraphs.push(numLines);
+      colorsForGraphs.push(colors);
 
       var width = thisNode.node().offsetWidth - margin.left - margin.right,
           height = parseInt(currentElement.dataset.height) - margin.top - margin.bottom;
 
-      drawGraph(thisNode, data, total, width, height, accent, tooltip, bisector, xLabel, yLabel, currentElement.dataset.scatter);
+      thisNode.append("svg");
+
+      drawGraph(thisNode, data, total, width, height, accent, tooltip, bisector, xLabel, yLabel, currentElement.dataset.scatter, numLines, colors);
+
+      if(numLines > 1){
+        var labels = currentElement.dataset.labels.split(",");
+        d3.select(currentElement).append("div")
+          .attr("class", "line-label")
+          .attr("width", "100%")
+          .selectAll("p").data(colors)
+          .enter().append("p")
+            .html(function(d, i){
+              return "<div class = 'bubble' style = 'background:" + d + "'></div> " + labels[i];
+            });
+      }
     },
     dataType: "text"
   });
