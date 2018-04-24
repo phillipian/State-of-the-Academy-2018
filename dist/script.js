@@ -291,6 +291,7 @@ d3.selectAll(".map").each(function(){
         return d3.rgb(d.color);
       })
       .on("mouseover", function(d, i){
+        d3.select(this).style("fill", d3.rgb(accent.brighter(0.3)));
         tooltipText = generateTooltip({title: d.name, responses: d.responses, percentage: d.responses / total});
         tooltip.classed("hidden", false).html(tooltipText);
       })
@@ -301,6 +302,7 @@ d3.selectAll(".map").each(function(){
           .style("top", mouse[1] - Math.round(tooltip.node().offsetHeight) - 10 + "px");
       })
       .on("mouseout", function(d){
+        d3.select(this).style("fill", d3.rgb(d.color));
         tooltip.classed("hidden", true);
       });
   });
