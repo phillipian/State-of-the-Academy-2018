@@ -89,12 +89,12 @@ d3.select(window).on('resize', function(){
       var thisNode = d3.select(this),
           width = thisNode.node().offsetWidth - margin.left - margin.right,
           height = parseInt(this.dataset.height) - margin.top - margin.bottom;
-      drawGraph(thisNode, dataForGraphs[i], totalForGraphs[i], width, height, this.dataset.accent, d3.select(this.firstChild), bisectors[i], this.dataset.x, this.dataset.y, this.dataset.scatter, numLinesGraphs[i], colorsForGraphs[i]);
+      drawGraph(thisNode, dataForGraphs[i], totalForGraphs[i], width, height, this.dataset.accent, d3.select(this.firstChild), bisectors[i], this.dataset.x, this.dataset.y, this.dataset.scatter, numLinesGraphs[i], colorsForGraphs[i], this.dataset.shade == "true");
     });
   }, 500);
 });
 
-function drawGraph(thisNode, data, total, width, height, accent, tooltip, bisector, xLabel, yLabel, scatter, numLines, colors){
+function drawGraph(thisNode, data, total, width, height, accent, tooltip, bisector, xLabel, yLabel, scatter, numLines, colors, shade){
   var x = d3.scaleLinear().range([0, width]);
   var y = d3.scaleLinear().range([height, 0]);
   var tooltipText;
@@ -157,6 +157,23 @@ function drawGraph(thisNode, data, total, width, height, accent, tooltip, bisect
         .attr("d", lines[i]);
     }
 
+    //Shade the space between lines, if necessary
+    if(shade){
+      var area = d3.area()
+        .x(function(d){return x(d.x);})
+        .y0(function(d){return i == 0 ? height : y(d.y[i - 1]);})
+        .y1(function(d){return y(d.y[i]);});
+
+      svg.append("path")
+        .data([data])
+        .attr("fill", colors[i])
+        .style("opacity", "0.5")
+        .style("z-index", "20")
+        .attr("d", area);
+    }
+  }
+
+  for(var i = 0; i < numLines; i++){
     //Add circles for each data point
     svg.selectAll(".dot-" + i)
       .data(data)
@@ -245,7 +262,7 @@ d3.selectAll(".line_chart").each(function(){
 
       thisNode.append("svg");
 
-      drawGraph(thisNode, data, total, width, height, accent, tooltip, bisector, xLabel, yLabel, currentElement.dataset.scatter, numLines, colors);
+      drawGraph(thisNode, data, total, width, height, accent, tooltip, bisector, xLabel, yLabel, currentElement.dataset.scatter, numLines, colors, currentElement.dataset.shade == "true");
 
       if(numLines > 1){
         var labels = currentElement.dataset.labels.split(",");
