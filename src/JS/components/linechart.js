@@ -39,12 +39,6 @@ function drawGraph(thisNode, data, total, width, height, accent, tooltip, bisect
 
   thisNode.select('svg').selectAll("*").remove();
 
-  var yBisector;
-
-  if(numLines > 1){
-    yBisector = d3.bisector(function(d) { return d.x; }).right
-  }
-
   var svg = thisNode.select("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
@@ -56,11 +50,12 @@ function drawGraph(thisNode, data, total, width, height, accent, tooltip, bisect
 
       if(d0 && d1){
         var d = x0 - d0.x > d1.x - x0 ? d1 : d0;
-        tooltipText = generateTooltip({title: d.x, responses: d.y, percentage: d.y / total});
+        if(numLines > 1) tooltipText = generateTooltipMultiline({title: d.x, responses: d.y, colors: colors, total: total});
+        else tooltipText = generateTooltip({title: d.x, responses: d.y, percentage: d.y / total});
         tooltip.classed("hidden", false).html(tooltipText);
 
         tooltip.style("left", x(d.x) + margin.left - Math.round(tooltip.node().offsetWidth / 2) + "px")
-          .style("top", y(d.y) - Math.round(tooltip.node().offsetHeight) - 12 + margin.top + "px");
+          .style("top", y(d3.max(d.y)) - Math.round(tooltip.node().offsetHeight) - 12 + margin.top + "px");
       }
     })
     .on("mouseout", function(d){

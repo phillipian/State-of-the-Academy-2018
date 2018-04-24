@@ -3,6 +3,28 @@ function generateTooltip(json) {
   return "<h4>" + json.title + "</h4><p>Responses: <strong>" + json.responses + "</strong>" + (json.percentage ? "<br>Percentage: <strong>" + (json.percentage * 100).toFixed(1) + "%</strong>" : "") + "</p>";
 }
 
+//Returns an html string for the tooltip for the multiline
+function generateTooltipMultiline(json) {
+  var responseStr = "",
+      percentageStr = "";
+  json.responses = json.responses.map(function(d, i){
+    return {
+      data: d,
+      color: json.colors[i]
+    };
+  });
+  json.responses.sort(function(a, b){
+    return b.data - a.data;
+  });
+
+  for(var i = 0; i < json.responses.length; i++){
+    responseStr += "<div class = 'bubble' style = 'background:" + json.responses[i].color + "'></div> <span>" + json.responses[i].data + "</span><br>";
+    percentageStr += "<div class = 'bubble' style = 'background:" + json.responses[i].color + "'></div> <span>" + (json.responses[i].data * 100 / json.total).toFixed(1) + "%</span><br>";
+  }
+
+  return "<h4>" + json.title + "</h4><p>Responses:</p>" + responseStr + "<p>Percentage:</p>" + percentageStr;
+}
+
 $(document).ready(function(){
   //Smooth scrolling
   $("#sidebar a").on('click', function(event) {
@@ -91,12 +113,6 @@ function drawGraph(thisNode, data, total, width, height, accent, tooltip, bisect
 
   thisNode.select('svg').selectAll("*").remove();
 
-  var yBisector;
-
-  if(numLines > 1){
-    yBisector = d3.bisector(function(d) { return d.x; }).right
-  }
-
   var svg = thisNode.select("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
@@ -108,11 +124,12 @@ function drawGraph(thisNode, data, total, width, height, accent, tooltip, bisect
 
       if(d0 && d1){
         var d = x0 - d0.x > d1.x - x0 ? d1 : d0;
-        tooltipText = generateTooltip({title: d.x, responses: d.y, percentage: d.y / total});
+        if(numLines > 1) tooltipText = generateTooltipMultiline({title: d.x, responses: d.y, colors: colors, total: total});
+        else tooltipText = generateTooltip({title: d.x, responses: d.y, percentage: d.y / total});
         tooltip.classed("hidden", false).html(tooltipText);
 
         tooltip.style("left", x(d.x) + margin.left - Math.round(tooltip.node().offsetWidth / 2) + "px")
-          .style("top", y(d.y) - Math.round(tooltip.node().offsetHeight) - 12 + margin.top + "px");
+          .style("top", y(d3.max(d.y)) - Math.round(tooltip.node().offsetHeight) - 12 + margin.top + "px");
       }
     })
     .on("mouseout", function(d){
@@ -423,4 +440,3 @@ var pieCharts = d3.selectAll(".pie").each(function(){
         return "<div class = 'bubble' style = 'background:" + d.color + "'></div>" + d.label;
       });
 });
-
