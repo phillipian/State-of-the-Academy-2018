@@ -5,3 +5,4 @@
 - [ ] Collated bar charts
 - [ ] Make sure clicking works on mobile
 - [ ] Make tooltips clearer
+- [ ] Wrap barchart labels
