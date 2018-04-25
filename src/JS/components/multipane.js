@@ -39,7 +39,6 @@ function switchPane(i, id, globalThis){
       }
       else{
         d3.select(this).classed("hidden", true);
-        redrawGraphs();
       }
     }
   });
