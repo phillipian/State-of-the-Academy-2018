@@ -8,23 +8,6 @@ var dataForGraphs = [],
     colorsForGraphs = [],
     numLinesGraphs = [];
 
-function redrawGraphs(){
-  d3.selectAll(".line_chart").each(function(d, i){
-    var thisNode = d3.select(this),
-        width = d3.select("#sections").node().offsetWidth - margin.left - margin.right,
-        height = parseInt(this.dataset.height) - margin.top - margin.bottom;
-
-    drawGraph(thisNode, dataForGraphs[i], totalForGraphs[i], width, height, this.dataset.accent, d3.select(this.firstChild), bisectors[i], this.dataset.x, this.dataset.y, this.dataset.scatter, numLinesGraphs[i], colorsForGraphs[i], this.dataset.shade == "true");
-  });
-}
-
-var resizeId;
-d3.select(window).on('resize', function(){
-  resizeId = setTimeout(function(){
-    redrawGraphs();
-  }, 500);
-});
-
 function drawGraph(thisNode, data, total, width, height, accent, tooltip, bisector, xLabel, yLabel, scatter, numLines, colors, shade){
   var x = d3.scaleLinear().range([0, width]);
   var y = d3.scaleLinear().range([height, 0]);

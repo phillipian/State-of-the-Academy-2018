@@ -16,6 +16,7 @@ html(lang='en')
     include components/piechart.pug
     include components/text-fact.pug
     include components/line-chart.pug
+    include components/vertical-barchart.pug
     #wrapper
       header
         #background
@@ -87,6 +88,9 @@ html(lang='en')
           -var accent_color = "#a29bfe"
           #school.section
             h2 School
+            br
+            h3 Barchart
+            +vertical_barchart("barchart1", accent_color, 400, "/assets/data/barchart.csv", "X label", "Y Label")
             br
             h3 Multipane Interface
             .multipane#multipane-1(data-labels = "Line Chart,Scatter Plot,Multiline")
