@@ -73,6 +73,32 @@
   }
 }
 
+// ** MULTIPANE **
+.multipane-labels{
+  width: 100%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  text-align: center;
+  a{
+    font-family: gotham_bold;
+    background: white;
+    border: 1px solid $black;
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: 0.2s all;
+
+    &:hover{
+      background: $white;
+    }
+  }
+  .selected{
+    background: $white;
+    &:hover{
+      background: $white;
+    }
+  }
+}
+
 // ** PIE CHART **
 .pie{
   margin: 20px 0 0 0;

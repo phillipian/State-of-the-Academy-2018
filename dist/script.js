@@ -82,15 +82,20 @@ var dataForGraphs = [],
     colorsForGraphs = [],
     numLinesGraphs = [];
 
+function redrawGraphs(){
+  d3.selectAll(".line_chart").each(function(d, i){
+    var thisNode = d3.select(this),
+        width = d3.select("#sections").node().offsetWidth - margin.left - margin.right,
+        height = parseInt(this.dataset.height) - margin.top - margin.bottom;
+        
+    drawGraph(thisNode, dataForGraphs[i], totalForGraphs[i], width, height, this.dataset.accent, d3.select(this.firstChild), bisectors[i], this.dataset.x, this.dataset.y, this.dataset.scatter, numLinesGraphs[i], colorsForGraphs[i], this.dataset.shade == "true");
+  });
+}
+
 var resizeId;
 d3.select(window).on('resize', function(){
   resizeId = setTimeout(function(){
-    d3.selectAll(".line_chart").each(function(d, i){
-      var thisNode = d3.select(this),
-          width = thisNode.node().offsetWidth - margin.left - margin.right,
-          height = parseInt(this.dataset.height) - margin.top - margin.bottom;
-      drawGraph(thisNode, dataForGraphs[i], totalForGraphs[i], width, height, this.dataset.accent, d3.select(this.firstChild), bisectors[i], this.dataset.x, this.dataset.y, this.dataset.scatter, numLinesGraphs[i], colorsForGraphs[i], this.dataset.shade == "true");
-    });
+    redrawGraphs();
   }, 500);
 });
 
@@ -341,6 +346,53 @@ d3.selectAll(".map").each(function(){
       });
   });
 });
+
+/*
+  Multipane interface
+*/
+
+var multipane = d3.selectAll(".multipane").each(function(){
+  var labels = this.dataset.labels.split(","),
+      id = this.id;
+
+  //Add labels
+  d3.select(this).insert("div",":first-child")
+    .attr("class", "multipane-labels")
+    .html(function(d){
+      var str = "";
+      for(var i = 0; i < labels.length; i++){
+        str += "<a " + (i == 0 ? "class = 'selected'" : "") + " onclick = 'switchPane(" + i + ",\"" + id + "\", this)'>" + labels[i] + "</a>";
+      }
+      return str;
+    });
+
+  var children = this.children;
+
+  for(var i = 2; i < children.length; i++){
+    d3.select(children[i])
+      .classed("hidden", true);
+  }
+
+});
+
+function switchPane(i, id, globalThis){
+  d3.select("#" + id).select(".multipane-labels").selectAll("*").each(function(d, index){
+    if(index == i) d3.select(this).classed("selected", true);
+    else d3.select(this).classed("selected", false);
+  });
+
+  d3.selectAll("#" + id + ">div").each(function(d, index){
+    if(index > 0){
+      if(index - 1 == i) {
+        d3.select(this).classed("hidden", false);
+      }
+      else{
+        d3.select(this).classed("hidden", true);
+        redrawGraphs();
+      }
+    }
+  });
+}
 
 /*
   Percentage Slider
