@@ -47,6 +47,33 @@
   transition: 0.2s all;
 }
 
+.tooltip-horizontal{
+  &:after, &:before {
+    right: 100%;
+  	top: 50%;
+    left: auto;
+  	border: solid transparent;
+  	content: " ";
+  	height: 0;
+  	width: 0;
+  	position: absolute;
+  	pointer-events: none;
+  }
+
+  &:after {
+  	border-color: rgba(255, 255, 255, 0);
+  	border-right-color: #ffffff;
+  	border-width: 10px;
+  	margin-top: -10px;
+  }
+  &:before {
+  	border-color: rgba(245, 0, 0, 0);
+  	border-right-color: $black;
+  	border-width: 11px;
+  	margin-top: -11px;
+  }
+}
+
 .hidden{
   display: none;
 }

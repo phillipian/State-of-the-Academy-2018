@@ -17,6 +17,7 @@ html(lang='en')
     include components/text-fact.pug
     include components/line-chart.pug
     include components/vertical-barchart.pug
+    include components/horizontal-barchart.pug
     #wrapper
       header
         #background
@@ -90,6 +91,7 @@ html(lang='en')
             h2 School
             br
             h3 Barchart
+            +horizontal_barchart("barchart2", accent_color, 600, "/assets/data/barchart.csv", "X label", "Y Label")
             +vertical_barchart("barchart1", accent_color, 400, "/assets/data/barchart.csv", "X label", "Y Label")
             br
             h3 Multipane Interface
