@@ -80,8 +80,6 @@ var margin = {top: 20, right: 20, bottom: 50, left: 50},
     dataForBarCharts = [],
     totalForBarCharts = [];
 
-//TODO: resizing
-
 function drawBarChart(currentThis, data, total){
   var accent = currentThis.dataset.accent,
       height = parseInt(currentThis.dataset.height) - margin.top - margin.bottom,
@@ -89,51 +87,27 @@ function drawBarChart(currentThis, data, total){
       yLabel = currentThis.dataset.y,
       tooltip = d3.select(currentThis.firstChild),
       tooltipText,
-      width = d3.select("#sections").node().offsetWidth - margin.left - margin.right;;
+      width = d3.select("#sections").node().offsetWidth - margin.left - margin.right,
+      x,
+      y,
+      svg,
+      className = currentThis.className.split(" ")[1];
 
-  if(currentThis.className.split(" ")[1] == "barchart-horizontal"){ //Horizontal
+  d3.select(currentThis).select('svg').selectAll("*").remove();
+
+  svg = d3.select(currentThis).select("svg")
+    .attr("width", width + marginHorizontal.left + marginHorizontal.right)
+    .attr("height", height + marginHorizontal.top + marginHorizontal.bottom)
+    .append("g")
+      .attr("transform", "translate(" + marginHorizontal.left + "," + marginHorizontal.top + ")");
+
+  if(className == "barchart-horizontal"){
     width = d3.select("#sections").node().offsetWidth - marginHorizontal.left - marginHorizontal.right;
-    var x = d3.scaleLinear().range([0, width]);
-    var y = d3.scaleBand().range([height, 0]).padding(0.2);
+    x = d3.scaleLinear().range([0, width]);
+    y = d3.scaleBand().range([height, 0]).padding(0.2);
 
     x.domain([0, d3.max(data, function(d) { return d.y; })]);
     y.domain(data.map(function(d) { return d.label; }));
-
-    var svg = d3.select(currentThis).select("svg")
-      .attr("width", width + marginHorizontal.left + marginHorizontal.right)
-      .attr("height", height + marginHorizontal.top + marginHorizontal.bottom)
-      .append("g")
-        .attr("transform", "translate(" + marginHorizontal.left + "," + marginHorizontal.top + ")");
-
-    //Add x axis
-    svg.append("g")
-      .attr("class", "xAxis")
-      .attr("transform", "translate(0," + height + ")")
-      .call(d3.axisBottom(x));
-
-    //Add y axis
-    svg.append("g")
-      .attr("class", "y axis")
-      .call(d3.axisLeft(y));
-
-    //Label for X axis
-    svg.append("text")
-      .attr("transform", "rotate(-90)")
-      .attr("y", 0 - marginHorizontal.left)
-      .attr("x", 0 - (height / 2))
-      .attr("dy", "1em")
-      .style("text-anchor", "middle")
-      .style("font-family", "source_sans_pro")
-      .style("font-weight", "bold")
-      .text(xLabel);
-
-    //Label for Y axis
-    svg.append("text")
-      .attr("transform", "translate(" + (width / 2) + " ," + (height + marginHorizontal.top + 20) + ")")
-      .style("text-anchor", "middle")
-      .style("font-family", "source_sans_pro")
-      .style("font-weight", "bold")
-      .text(yLabel);
 
     svg.selectAll(".bar")
       .data(data)
@@ -144,37 +118,14 @@ function drawBarChart(currentThis, data, total){
           .style("fill", accent)
           .attr("y", function(d) { return y(d.label); })
           .attr("width", function(d) { return x(d.y); });
-
-    svg.selectAll(".bar").on("mouseover", function(d, i){
-      tooltipText = generateTooltip({title: d.label, responses: d.y, percentage: d.y / total});
-      tooltip.classed("hidden", false).html(tooltipText);
-
-      tooltip.style("left", x(d.y) + marginHorizontal.left + 12 + "px")
-      .style("top", y(d.label) - y.bandwidth() / 2 + marginHorizontal.top + "px");
-    })
-    .on("mouseout", function(d){
-      var e = d3.event.toElement;
-      if(e && e.parentNode.parentNode != this.parentNode && e.parentNode != this.parentNode && e != this.parentNode) tooltip.classed("hidden", true);
-    });
   }
   else{
-        //Set the ranges
-    var x = d3.scaleBand()
-                .range([0, width])
-                .padding(0.2),
-        y = d3.scaleLinear()
-                .range([height, 0]);
-
-    d3.select(currentThis).select('svg').selectAll("*").remove();
+    //Set the ranges
+    x = d3.scaleBand().range([0, width]).padding(0.2);
+    y = d3.scaleLinear().range([height, 0]);
 
     x.domain(data.map(function(d) { return d.label; }));
     y.domain([0, d3.max(data, function(d) { return d.y; })]);
-
-    var svg = d3.select(currentThis).select("svg")
-      .attr("width", width + margin.left + margin.right)
-      .attr("height", height + margin.top + margin.bottom)
-      .append("g")
-        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
     // append the rectangles for the bar chart
     svg.selectAll(".bar")
@@ -186,50 +137,49 @@ function drawBarChart(currentThis, data, total){
         .style("fill", accent)
         .attr("y", function(d) { return y(d.y); })
         .attr("height", function(d) { return height - y(d.y); });
-
-    // add the x Axis w/ rotated labels
-    svg.append("g")
-      .style("position", "relative")
-      .attr("class", "xAxis")
-      .attr("transform", "translate(0," + height + ")")
-      .call(d3.axisBottom(x));
-
-    // add the y Axis
-    svg.append("g")
-        .call(d3.axisLeft(y));
-
-    //Label for Y axis
-    svg.append("text")
-      .attr("transform", "rotate(-90)")
-      .attr("y", 0 - margin.left)
-      .attr("x", 0 - (height / 2))
-      .attr("dy", "1em")
-      .style("text-anchor", "middle")
-      .style("font-family", "source_sans_pro")
-      .style("font-weight", "bold")
-      .text(yLabel);
-
-    //Label for X axis
-    svg.append("text")
-      .attr("transform", "translate(" + (width / 2) + " ," + (height + margin.top + 20) + ")")
-      .style("text-anchor", "middle")
-      .style("font-family", "source_sans_pro")
-      .style("font-weight", "bold")
-      .text(xLabel);
-
-    svg.selectAll(".bar").on("mouseover", function(d, i){
-
-      tooltipText = generateTooltip({title: d.label, responses: d.y, percentage: d.y / total});
-      tooltip.classed("hidden", false).html(tooltipText);
-
-      tooltip.style("left", x(d.label) + this.width.baseVal.value / 2 + margin.left - Math.round(tooltip.node().offsetWidth / 2) + "px")
-      .style("top", y(d.y) - Math.round(tooltip.node().offsetHeight) + margin.top - 12 + "px");
-    })
-    .on("mouseout", function(d){
-      var e = d3.event.toElement;
-      if(e && e.parentNode.parentNode != this.parentNode && e.parentNode != this.parentNode && e != this.parentNode) tooltip.classed("hidden", true);
-    });
   }
+
+  //Labels for mouseover
+  svg.selectAll(".bar").on("mouseover", function(d, i){
+    tooltipText = generateTooltip({title: d.label, responses: d.y, percentage: d.y / total});
+    tooltip.classed("hidden", false).html(tooltipText);
+
+    if(className == "barchart-horizontal") tooltip.style("left", x(d.y) + marginHorizontal.left + 12 + "px").style("top", y(d.label) - y.bandwidth() / 2 + marginHorizontal.top + "px");
+    else tooltip.style("left", x(d.label) + this.width.baseVal.value / 2 + margin.left - Math.round(tooltip.node().offsetWidth / 2) + "px").style("top", y(d.y) - Math.round(tooltip.node().offsetHeight) + margin.top - 12 + "px");
+  })
+  .on("mouseout", function(d){
+    var e = d3.event.toElement;
+    if(e && e.parentNode.parentNode != this.parentNode && e.parentNode != this.parentNode && e != this.parentNode) tooltip.classed("hidden", true);
+  });
+
+  //Add x axis
+  svg.append("g")
+    .attr("class", "xAxis")
+    .attr("transform", "translate(0," + height + ")")
+    .call(d3.axisBottom(x));
+
+  //Add y axis
+  svg.append("g")
+    .attr("class", "y axis")
+    .call(d3.axisLeft(y));
+
+  //Labels
+  svg.append("text")
+    .attr("transform", "rotate(-90)")
+    .attr("y", -1 * (className == "barchart-horizontal" ? marginHorizontal.left : margin.left))
+    .attr("x", 0 - (height / 2))
+    .attr("dy", "1em")
+    .style("text-anchor", "middle")
+    .style("font-family", "source_sans_pro")
+    .style("font-weight", "bold")
+    .text(className == "barchart-horizontal" ? xLabel : yLabel);
+
+  svg.append("text")
+    .attr("transform", "translate(" + (width / 2) + " ," + (height + margin.top + 20) + ")")
+    .style("text-anchor", "middle")
+    .style("font-family", "source_sans_pro")
+    .style("font-weight", "bold")
+    .text(className == "barchart-horizontal" ? yLabel : xLabel);
 
   svg.select(".xAxis").selectAll("text")
     .style("font-family", "source_sans_pro")
