@@ -145,7 +145,7 @@ function drawBarChart(currentThis, data, total){
     tooltip.classed("hidden", false).html(tooltipText);
 
     if(className == "barchart-horizontal") tooltip.style("left", x(d.y) + marginHorizontal.left + 12 + "px").style("top", y(d.label) - y.bandwidth() / 2 + marginHorizontal.top + "px");
-    else tooltip.style("left", x(d.label) + this.width.baseVal.value / 2 + margin.left - Math.round(tooltip.node().offsetWidth / 2) + "px").style("top", y(d.y) - Math.round(tooltip.node().offsetHeight) + margin.top - 12 + "px");
+    else tooltip.style("left", x(d.label) + (x.bandwidth() - tooltip.node().offsetWidth) / 2 + margin.left + "px").style("top", y(d.y) - Math.round(tooltip.node().offsetHeight) + margin.top - 12 + "px"); //TODO: for some reason this doesn't work properly
   })
   .on("mouseout", function(d){
     var e = d3.event.toElement;
