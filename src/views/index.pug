@@ -68,7 +68,7 @@ html(lang='en')
             ol.sub-nav(hidden)
           hr.other-hr(align = "left")
         #sections
-          -var accent_color = "#74b9ff"
+          -var accent_color = "#094F94"
           #general.section
             h2 General
             p Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. 
@@ -88,8 +88,8 @@ html(lang='en')
             h3 Map
             +us_map("us_map", "/assets/graphics/map.svg", "1,2,3,4,5,6,7", accent_color)
             hr
-          -var accent_color = "#a29bfe"
           #school.section
+            -var accent_color = "#14195C"
             h2 School
             br
             h3 Barchart
@@ -110,21 +110,27 @@ html(lang='en')
             +line_chart("chart5", accent_color, 300, "x-label", "y-label", "/assets/data/line_chart_1.csv", "false", 2, "line 1,line2", "true")
             hr
           #politics.section
+            -var accent_color = "#521A7E"
             h2 Politics &amp; Worldview
             hr
           #diversity.section
+            -var accent_color = "#74b9ff"
             h2 Community Diversity
             hr
           #wellness.section
+            -var accent_color = "#25AA60"
             h2 Wellness
             hr
           #sex.section
+            -var accent_color = "#E40066"
             h2 Sex
             hr
           #drugs.section
+            -var accent_color = "#EE601B"
             h2 Drugs
             hr
           #discipline.section
+            -var accent_color = "#B11423"
             h2 Discipline
       footer
         .left
