@@ -99,21 +99,21 @@ html(lang='en')
             h2 School
             br
             h3 Barchart
-            +horizontal_barchart("barchart2", accent_color, 600, "/assets/data/barchart.csv", "X label", "Y Label")
-            +vertical_barchart("barchart1", accent_color, 400, "/assets/data/barchart.csv", "X label", "Y Label")
-            +grouped_barchart("barchart3", accent_color, 400, "/assets/data/stacked.csv", "X label", "Y Label")
+            //+horizontal_barchart("barchart2", accent_color, 600, "/assets/data/barchart.csv", "X label", "Y Label")
+            //+vertical_barchart("barchart1", accent_color, 400, "/assets/data/barchart.csv", "X label", "Y Label")
+            //+grouped_barchart("barchart3", accent_color, 400, "/assets/data/stacked.csv", "X label", "Y Label")
             br
             h3 Multipane Interface
             .multipane#multipane-1(data-labels = "Line Chart,Scatter Plot,Multiline")
-              +line_chart("chart", accent_color, 300, "x-label", "y-label", "/assets/data/line_chart.csv", "false", 1, "false")
-              +line_chart("chart1", accent_color, 300, "x-label", "y-label", "/assets/data/line_chart.csv", "true", 1, "false")
-              +line_chart("chart2", accent_color, 300, "x-label", "y-label", "/assets/data/line_chart_1.csv", "false", 2, "line 1,line2", "true")
+              //+line_chart("chart", accent_color, 300, "x-label", "y-label", "/assets/data/line_chart.csv", "false", 1, "false")
+              //+line_chart("chart1", accent_color, 300, "x-label", "y-label", "/assets/data/line_chart.csv", "true", 1, "false")
+              //+line_chart("chart2", accent_color, 300, "x-label", "y-label", "/assets/data/line_chart_1.csv", "false", 2, "line 1,line2", "true")
             h3 Line Chart
-            +line_chart("chart3", accent_color, 300, "x-label", "y-label", "/assets/data/line_chart.csv", "false", 1, "false")
+            //+line_chart("chart3", accent_color, 300, "x-label", "y-label", "/assets/data/line_chart.csv", "false", 1, "false")
             h3 Scatter Plot
-            +line_chart("chart4", accent_color, 300, "x-label", "y-label", "/assets/data/line_chart.csv", "true", 1, "false")
+            //+line_chart("chart4", accent_color, 300, "x-label", "y-label", "/assets/data/line_chart.csv", "true", 1, "false")
             h3 Multiline Chart 
-            +line_chart("chart5", accent_color, 300, "x-label", "y-label", "/assets/data/line_chart_1.csv", "false", 2, "line 1,line2", "true")
+            //+line_chart("chart5", accent_color, 300, "x-label", "y-label", "/assets/data/line_chart_1.csv", "false", 2, "line 1,line2", "true")
             hr
           #politics.section
             -var accent_color = "#521A7E"
