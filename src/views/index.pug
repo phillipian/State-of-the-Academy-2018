@@ -86,11 +86,19 @@ html(lang='en')
             br
             h3 For students from the United States, what is your immigration status?
             +vertical_barchart("immigrationstatus", accent_color, 300, "./assets/data/general/immigration.csv", "Immigration Status", "Responses")
+            br 
+            h3 What is your ethnicity?
+            p <i>Note: respondents may have selected more than one</i>
+            +horizontal_barchart("ethnicity", accent_color, 400, "./assets/data/general/ethnicity.csv", "", "Responses", "120")
             h3 Are you a varsity athlete? 
             +percentage_slider("varsityathlete", 484, 579, accent_color)
             br
             h3 Are you on any form of financial aid?
             +percentage_slider("financialaid", 494, 564, accent_color)
+            br
+            h3 If you attend college, will you be a first generation college student?
+            +percentage_slider("financialaid", 77, 986, accent_color)
+            br
             //+pie_chart("pie_chart", "30,40,50", "Entry 1,Entry 2,Entry 3", accent_color)
             br 
             hr

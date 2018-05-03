@@ -75,12 +75,13 @@ $(document).ready(function(){
   Bar Chart
 */
 
-var margin = {top: 20, right: 20, bottom: 50, left: 50},
-    marginHorizontal = {top: 20, right: 20, bottom: 50, left: 70},
-    dataForBarCharts = [],
+var dataForBarCharts = [],
     totalForBarCharts = [];
 
 function drawBarChart(currentThis, data, total){
+  var margin = {top: 20, right: 20, bottom: 50, left: 50},
+      marginHorizontal = {top: 20, right: 20, bottom: 50, left: 70};
+
   var accent = currentThis.dataset.accent,
       height = parseInt(currentThis.dataset.height) - margin.top - margin.bottom,
       xLabel = currentThis.dataset.x,
@@ -92,6 +93,8 @@ function drawBarChart(currentThis, data, total){
       y,
       svg,
       className = currentThis.className.split(" ")[1];
+
+  if("leftmargin" in currentThis.dataset) marginHorizontal.left = parseInt(currentThis.dataset.leftmargin);
 
   d3.select(currentThis).select('svg').selectAll("*").remove();
 
