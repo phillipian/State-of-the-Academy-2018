@@ -153,10 +153,13 @@
     display: inline-block;
     font-family: "gotham_bold";
     text-align: center;
-    color: $black;
+  }
+  .right{
+    color: white;
   }
   .left{
     background: white;
+    color: $black;
   }
 }
 
@@ -193,7 +196,7 @@
     height: 100%;
     display: block;
     margin: 0px auto;
-    stroke: $black;
+    stroke: $white;
     path{
       transition: fill .2s ease;
     }

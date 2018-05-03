@@ -422,7 +422,7 @@ d3.selectAll(".map").each(function(){
   var total = 0,
       regionNames = ["Discontinuous", "Northeast", "Southeast", "Southwest", "West", "Midwest", "International"];
 
-  var accent = d3.color(this.dataset.accent);
+  var accent = d3.color(this.dataset.accent).brighter(1);
 
   var responses = this.dataset.responses.split(",").map(function(element, i){
     total += parseInt(element);
@@ -443,8 +443,6 @@ d3.selectAll(".map").each(function(){
       color: d3.color(accent.darker(0.4 * colorSort.indexOf(element)))
     };
   });
-
-  console.log(responses);
 
   var currentElement = this,
       tooltipText,
