@@ -232,8 +232,8 @@ var dataForGraphs = [],
     numLinesGraphs = [];
 
 function drawGraph(thisNode, data, total, width, height, accent, tooltip, bisector, xLabel, yLabel, scatter, numLines, colors, shade){
-  var x = d3.scaleLinear().range([0, width]);
-  var y = d3.scaleLinear().range([height, 0]);
+  var x = d3.scaleBand().rangeRound([0, width]).padding(0.1);
+  var y = d3.scaleLinear().rangeRound([height, 0]);
   var tooltipText;
 
   //Create the line
@@ -276,10 +276,10 @@ function drawGraph(thisNode, data, total, width, height, accent, tooltip, bisect
     .append("g")
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-  var xExtent = d3.extent(data, function(d) { return d.x; }),
-      xRange = xExtent[1] - xExtent[0];
+  console.log(data);
 
-  x.domain([xExtent[0] - (xRange * 0.05), xExtent[1] + (xRange * 0.05)]);
+  //x.domain([xExtent[0] - (xRange * 0.05), xExtent[1] + (xRange * 0.05)]);
+  x.domain(data.map(function(d) { return "" + d.x; }));
   y.domain([0, d3.max(data, function(d) { return d3.max(d.y); })]); //TODO: Replace d.y with Math.max of all ys
 
   for(var i = 0; i < numLines; i++){
@@ -295,7 +295,7 @@ function drawGraph(thisNode, data, total, width, height, accent, tooltip, bisect
     }
 
     //Shade the space between lines, if necessary
-    if(shade){
+    if(shade == "true"){
       var area = d3.area()
         .x(function(d){return x(d.x);})
         .y0(function(d){return i == 0 ? height : y(d.y[i - 1]);})
@@ -378,7 +378,7 @@ d3.selectAll(".line_chart").each(function(){
         if(temp[0]){
           total += parseInt(temp[1]);
           data.push({
-            x: parseInt(temp[0]),
+            x: temp[0],
             y: temp.slice(1).map(function(element){
               return parseInt(element)
             })
@@ -399,7 +399,7 @@ d3.selectAll(".line_chart").each(function(){
 
       thisNode.append("svg");
 
-      drawGraph(thisNode, data, total, width, height, accent, tooltip, bisector, xLabel, yLabel, currentElement.dataset.scatter, numLines, colors, currentElement.dataset.shade == "true");
+      drawGraph(thisNode, data, total, width, height, accent, tooltip, bisector, xLabel, yLabel, currentElement.dataset.scatter, numLines, colors, currentElement.dataset.shade);
 
       if(numLines > 1){
         var labels = currentElement.dataset.labels.split(",");
@@ -647,7 +647,7 @@ d3.select(window).on('resize', function(){
           width = d3.select("#sections").node().offsetWidth - margin.left - margin.right,
           height = parseInt(this.dataset.height) - margin.top - margin.bottom;
 
-      drawGraph(thisNode, dataForGraphs[i], totalForGraphs[i], width, height, this.dataset.accent, d3.select(this.firstChild), bisectors[i], this.dataset.x, this.dataset.y, this.dataset.scatter, numLinesGraphs[i], colorsForGraphs[i], this.dataset.shade == "true");
+      drawGraph(thisNode, dataForGraphs[i], totalForGraphs[i], width, height, this.dataset.accent, d3.select(this.firstChild), bisectors[i], this.dataset.x, this.dataset.y, this.dataset.scatter, numLinesGraphs[i], colorsForGraphs[i], this.dataset.shade);
     });
 
     d3.selectAll(".barchart").each(function(d, i){
