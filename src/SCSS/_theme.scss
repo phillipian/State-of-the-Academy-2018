@@ -32,7 +32,7 @@ $blue: #2980b9;
 }
 
 // ** General text styles **
-p, a, span{
+p, a, span, ul{
   font-family: source_sans_pro;
 }
 
@@ -46,6 +46,15 @@ a{ //TODO: add a hover color for a
 
 p{
   color: $black;
+}
+
+ul{
+  padding-left: 20px;
+
+  li{
+    list-style-type: disc;
+    color: $black;
+  }
 }
 
 .phillipian-name{
