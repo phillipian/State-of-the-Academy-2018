@@ -236,6 +236,18 @@ html(lang='en')
             h2 Drugs
             p A piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC.
             br
+            h3 Juuling by the years
+            +text_fact("28.86%", "of 2016-2017 respondents have juuled")
+            +text_fact("39.10%", "of 2017-2018 respondents have juuled")
+            h3 Have you ever used hallucinogens or hard drugs?
+            p <i>Note: respondents may have selected more than one</i>
+            +vertical_barchart("drugs", accent_color, 250, "./assets/data/drugs/drug.csv", "Drug", "Responses")
+            //TODO: INVERT COLORS
+            h3 Have you ever attended a school-sponsored event while under the influence of drugs or alcohol?
+            +percentage_slider("school-sponsored-drugs", 226, 820, accent_color)
+            br
+            h3 How often do you consume drugs or alcohol on campus?
+            +vertical_barchart("frequency-drugs", accent_color, 250, "./assets/data/drugs/frequency.csv", "", "Responses")
             br
             hr
           #discipline.section
