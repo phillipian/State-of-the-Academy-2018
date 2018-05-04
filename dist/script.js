@@ -567,7 +567,7 @@ var percentageSliders = d3.selectAll(".percentage-slider").each(function(){
 var pieCharts = d3.selectAll(".pie").each(function(){
   var responses = this.dataset.responses.split(","),
       labels = this.dataset.labels.split(","),
-      accent = d3.color(this.dataset.accent);
+      accent = d3.color(this.dataset.accent).brighter(1);
 
   var width = 300,
       height = 300,
