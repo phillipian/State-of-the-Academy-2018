@@ -198,6 +198,28 @@ html(lang='en')
             br
             -var accent_color = "#25AA60"
             h2 Wellness
+            p Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC.
+            br
+            h3 On average, how many hours of sleep do you get per night?
+            +line_chart("chart", accent_color, 300, "GPA", "Respondents", "./assets/data/wellness/sleep.csv", "false", 1, "", "true")
+            h3 Generally speaking, do you consider yourself happy at Andover?
+            +percentage_slider("are-you-happy", 829, 225, accent_color)
+            br
+            h3 In general, do you think that Andover students are happy?
+            +percentage_slider("are-andover-students-happy", 665, 389, accent_color)
+            br
+            h3 What social media platforms do you use at Andover?
+            p <i>Note: respondents may have selected more than one</i>
+            .multipane#social-media(data-labels = "2018,2019,2020,2021,Everyone")
+              +vertical_barchart("social-media-2018", accent_color, 250, "./assets/data/wellness/social-media-2018.csv", "", "Responses")
+              +vertical_barchart("social-media-2019", accent_color, 250, "./assets/data/wellness/social-media-2019.csv", "", "Responses")
+              +vertical_barchart("social-media-2020", accent_color, 250, "./assets/data/wellness/social-media-2020.csv", "", "Responses")
+              +vertical_barchart("social-media-2021", accent_color, 250, "./assets/data/wellness/social-media-2021.csv", "", "Responses")
+              +vertical_barchart("social-media", accent_color, 250, "./assets/data/wellness/social-media.csv", "", "Responses")
+            h3 Have you ever been to Graham House or the Sykes Wellness Center to see a counselor?
+            +percentage_slider("counselors", 466, 588, accent_color)
+            br
+            br
             hr
           #sex.section
             -var accent_color = "#E40066"
@@ -209,10 +231,10 @@ html(lang='en')
             p <i>Note: respondents may have selected more than one</i>
             .multipane#sexual-activity(data-labels = "Everyone,2018,2019,2020,2021")
               +vertical_barchart("sex", accent_color, 250, "./assets/data/sex/sexual-activity.csv", "", "Responses")
-              +vertical_barchart("sex", accent_color, 250, "./assets/data/sex/sexual-activity-2018.csv", "", "Responses")
-              +vertical_barchart("sex", accent_color, 250, "./assets/data/sex/sexual-activity-2019.csv", "", "Responses")
-              +vertical_barchart("sex", accent_color, 250, "./assets/data/sex/sexual-activity-2020.csv", "", "Responses")
-              +vertical_barchart("sex", accent_color, 250, "./assets/data/sex/sexual-activity-2021.csv", "", "Responses")
+              +vertical_barchart("sex-2018", accent_color, 250, "./assets/data/sex/sexual-activity-2018.csv", "", "Responses")
+              +vertical_barchart("sex-2019", accent_color, 250, "./assets/data/sex/sexual-activity-2019.csv", "", "Responses")
+              +vertical_barchart("sex-2020", accent_color, 250, "./assets/data/sex/sexual-activity-2020.csv", "", "Responses")
+              +vertical_barchart("sex-2021", accent_color, 250, "./assets/data/sex/sexual-activity-2021.csv", "", "Responses")
             h3 How many people have you engaged in sexual activity with?
             +vertical_barchart("sex-partners", accent_color, 250, "./assets/data/sex/sexual-partners.csv", "Number of Partners", "Responses")
             h3 Do you consistently ask your partner for verbal consent?
