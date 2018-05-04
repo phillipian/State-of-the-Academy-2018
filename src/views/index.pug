@@ -207,7 +207,12 @@ html(lang='en')
             br
             h3 Have you ever engaged in sexual activity? 
             p <i>Note: respondents may have selected more than one</i>
-            +vertical_barchart("sex", accent_color, 250, "./assets/data/sex/sexual-activity.csv", "", "Responses")
+            .multipane#sexual-activity(data-labels = "Everyone,2018,2019,2020,2021")
+              +vertical_barchart("sex", accent_color, 250, "./assets/data/sex/sexual-activity.csv", "", "Responses")
+              +vertical_barchart("sex", accent_color, 250, "./assets/data/sex/sexual-activity-2018.csv", "", "Responses")
+              +vertical_barchart("sex", accent_color, 250, "./assets/data/sex/sexual-activity-2019.csv", "", "Responses")
+              +vertical_barchart("sex", accent_color, 250, "./assets/data/sex/sexual-activity-2020.csv", "", "Responses")
+              +vertical_barchart("sex", accent_color, 250, "./assets/data/sex/sexual-activity-2021.csv", "", "Responses")
             h3 How many people have you engaged in sexual activity with?
             +vertical_barchart("sex-partners", accent_color, 250, "./assets/data/sex/sexual-partners.csv", "Number of Partners", "Responses")
             h3 Do you consistently ask your partner for verbal consent?
