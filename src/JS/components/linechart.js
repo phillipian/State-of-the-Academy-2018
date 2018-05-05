@@ -9,7 +9,7 @@ var dataForGraphs = [],
     numLinesGraphs = [];
 
 function drawGraph(thisNode, data, total, width, height, accent, tooltip, bisector, xLabel, yLabel, scatter, numLines, colors, shade){
-  var x = d3.scaleBand().rangeRound([0, width]).padding(0.1);
+  var x = d3.scalePoint().rangeRound([0, width]).padding(0.1);
   var y = d3.scaleLinear().rangeRound([height, 0]);
   var tooltipText;
 
