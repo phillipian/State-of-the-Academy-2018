@@ -182,7 +182,25 @@ html(lang='en')
             +percentage_slider("all-gender-housing", 921, 136, accent_color)
             br
             h3 While at Andover, have you ever felt the need to censor yourself due to your political leaning?
-            +percentage_slider("all-gender-housing", 654, 403, accent_color)
+            +percentage_slider("censorship", 654, 403, accent_color)
+            br
+            h3 Self-censorship by political affiliation.
+            +grouped_barchart("censorship-politics", accent_color, 300, "./assets/data/politics/censorship-politics.csv", "", "Responses", "Yes (I have censored myself due to political leaning),No (I have not censored myself due to political leaning)")
+            br
+            h3 Feminism and the Black Lives Matter movement.
+            +grouped_barchart("blm-feminism", accent_color, 300, "./assets/data/politics/blm-feminism.csv", "", "Responses", "Yes (I support the BLM movement),No (I don't support the BLM movement)")
+            br
+            h3 Feminism and belief in a rape culture.
+            +grouped_barchart("feminism-rapeculture", accent_color, 300, "./assets/data/politics/feminism-rapeculture.csv", "", "Responses", "Yes (I believe there is a rape culture at Andover),No (I don't believe there is a rape culture at Andover)")
+            br
+            //TODO: make this a percentage: 
+            h3 Belief in a rape culture by gender.
+            //+grouped_barchart("rapeculture-gender", accent_color, 300, "./assets/data/politics/rapeculture-gender.csv", "", "Responses", "Agender,Genderfluid,Genderqueer,Man,Woman")
+            +grouped_barchart("rapeculture-gender", accent_color, 300, "./assets/data/politics/rapeculture-gender.csv", "", "Responses", "Yes (I believe there is a rape culture at Andover),No (I don't believe there is a rape culture at Andover)")
+            br
+            h3 Belief in reverse racism by grade
+            p Reverse racism is “prejudice, discrimination, or antagonism on the basis of race directed against a member of a dominant or privileged racial group” (Oxford Dictionaries). 
+            +grouped_barchart("reverse-racism", accent_color, 300, "./assets/data/politics/reverse-racism.csv", "", "Responses", "Yes (I believe that reverse racism exists),No (I don't believe that reverse racism exists)")
             br
             br
             hr

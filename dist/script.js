@@ -122,6 +122,47 @@ function drawBarChart(currentThis, data, total){
           .attr("y", function(d) { return y(d.label); })
           .attr("width", function(d) { return x(d.y); });
   }
+  else if(className == "barchart-grouped"){
+    x = d3.scaleBand()
+        .rangeRound([0, width])
+        .paddingInner(0.1);
+
+    var x1 = d3.scaleBand()
+        .padding(0.05);
+
+    y = d3.scaleLinear()
+        .rangeRound([height, 0]);
+
+    var keys = [];
+    for(var i = 0; i < data[0].y.length; i++) keys.push(i);
+
+    x.domain(data.map(function(d) { return d.label; }));
+    x1.domain(keys).rangeRound([0, x.bandwidth()]);
+    y.domain([0, d3.max(data, function(d) { return d3.max(keys, function(key) { return d.y[key]; }); })]).nice();
+
+    svg.append("g")
+      .selectAll("g")
+      .data(data)
+      .enter().append("g")
+        .attr("transform", function(d) { return "translate(" + x(d.label) + ",0)"; })
+      .selectAll("rect")
+      .data(function(d) { return keys.map(function(key) { return {key: key, value: d.y[key]}; });})
+      .enter().append("rect")
+        .attr("x", function(d) { return x1(d.key); })
+        .attr("y", function(d) { return y(d.value); })
+        .attr("width", x1.bandwidth())
+        .attr("height", function(d) { return height - y(d.value); })
+        .attr("fill", function(d, i) { return d3.rgb(d3.color(accent).brighter(i)); });
+
+    d3.select(currentThis).append("div")
+      .attr("class", "bar-label")
+      .attr("width", "100%")
+      .selectAll("p").data(currentThis.dataset.labels.split(","))
+      .enter().append("p")
+        .html(function(d, i){
+          return "<div class = 'bubble' style = 'background:" + d3.rgb(d3.color(accent).brighter(i)) + "'></div>" + d;
+        });
+  }
   else{
     //Set the ranges
     x = d3.scaleBand().range([0, width]).padding(0.2);
@@ -250,10 +291,6 @@ var barCharts = d3.selectAll(".barchart").each(function(){
     },
     dataType: "text"
   });
-});
-
-d3.selectAll(".barchart-group").each(function(){
-
 });
 
 /*
