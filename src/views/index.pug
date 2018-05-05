@@ -263,6 +263,9 @@ html(lang='en')
               +vertical_barchart("sex-2019", accent_color, 250, "./assets/data/sex/sexual-activity-2019.csv", "", "Responses")
               +vertical_barchart("sex-2020", accent_color, 250, "./assets/data/sex/sexual-activity-2020.csv", "", "Responses")
               +vertical_barchart("sex-2021", accent_color, 250, "./assets/data/sex/sexual-activity-2021.csv", "", "Responses")
+            h3 Relationship status by sexuality.
+            +grouped_barchart("sexuality-commited-relationship", accent_color, 300, "./assets/data/sex/sexuality-commited-relationship.csv", "", "Percentage of that sexuality", "Yes (I'm in a committed relationship),No (I'm not in a committed relationship)")
+            br
             h3 How many people have you engaged in sexual activity with?
             +vertical_barchart("sex-partners", accent_color, 250, "./assets/data/sex/sexual-partners.csv", "Number of Partners", "Responses")
             h3 Do you consistently ask your partner for verbal consent?
