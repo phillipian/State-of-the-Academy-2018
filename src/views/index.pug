@@ -131,7 +131,6 @@ html(lang='en')
             -var accent_color = "#14195C"
             h2 School
             p Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC.
-            br
             +text_fact("5.2", "was the average school-wide Winter 2017-2018 G.P.A")
             h3 What was your rounded Winter 2017-2018 (unweighted) G.P.A.?
             p <i>Note: If respondents were between two numbers, they were insttructed to round up to the next closest decimal — a 5.3 G.P.A. would round to a 5.4</i>
@@ -199,6 +198,7 @@ html(lang='en')
             //+grouped_barchart("rapeculture-gender", accent_color, 300, "./assets/data/politics/rapeculture-gender.csv", "", "Responses", "Agender,Genderfluid,Genderqueer,Man,Woman")
             +grouped_barchart("rapeculture-gender", accent_color, 300, "./assets/data/politics/rapeculture-gender.csv", "", "Responses", "Yes (I believe there is a rape culture at Andover),No (I don't believe there is a rape culture at Andover)")
             br
+            //TODO: redo this graph so it is easier to compare (4 pie charts)
             h3 Belief in reverse racism by grade
             p Reverse racism is “prejudice, discrimination, or antagonism on the basis of race directed against a member of a dominant or privileged racial group” (Oxford Dictionaries). 
             +grouped_barchart("reverse-racism", accent_color, 300, "./assets/data/politics/reverse-racism.csv", "", "Responses", "Yes (I believe that reverse racism exists),No (I don't believe that reverse racism exists)")
