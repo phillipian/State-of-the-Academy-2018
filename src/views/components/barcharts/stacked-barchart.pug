@@ -1,4 +1,4 @@
-mixin stacked_barchart(id, accent, height, url, xLabel, yLabel) 
-  div(id = id class = "barchart barchart-vertical barchart-stacked" data-url = url data-accent = accent data-height = height data-x = xLabel data-y = yLabel)
+mixin stacked_barchart(id, accent, height, url, xLabel, yLabel, labels) 
+  div(id = id class = "barchart barchart-stacked" data-url = url data-accent = accent data-height = height data-x = xLabel data-y = yLabel data-labels = labels)
     .tooltip.hidden
   

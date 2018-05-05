@@ -55,18 +55,52 @@ function drawBarChart(currentThis, data, total){
     y = d3.scaleLinear().range([height, 0]);
 
     x.domain(data.map(function(d) { return d.label; }));
-    y.domain([0, d3.max(data, function(d) { return d.y; })]);
 
-    // append the rectangles for the bar chart
-    svg.selectAll(".bar")
-        .data(data)
-      .enter().append("rect")
-        .attr("class", "bar")
-        .attr("x", function(d) { return x(d.label); })
-        .attr("width", x.bandwidth())
-        .style("fill", accent)
-        .attr("y", function(d) { return y(d.y); })
-        .attr("height", function(d) { return height - y(d.y); });
+    if(className == "barchart-stacked"){
+      y.domain([0, d3.max(data, function(d) {
+        if(typeof d.y == "number") return d;
+        else return d.y.reduce(function(accumulator,el){
+          return accumulator + el;
+        }, 0);
+      })]).nice();
+
+      var index = 0;
+
+      svg.append("g")
+        .selectAll("g")
+        .data(d3.stack().keys([0,1,2])(data))
+        .enter().append("g")
+          .attr("fill", function(d, i){return d3.rgb(d3.color(accent).darker(i * 0.4));})
+        .selectAll("rect")
+        .data(function(d) {return d; })
+        .enter().append("rect")
+          .attr("x", function(d) { return x(d.data.label); })
+          .attr("y", function(d, i) { if(index == data[0].y.length) index = 0; return y((index == 0 ? 0 : d.data.y[index - 1]) + d.data.y[index++]); })
+          .attr("height", function(d, i) { if(index == data[0].y.length) index = 0;return height - y(d.data.y[index++]); })
+          .attr("width", x.bandwidth());
+
+      d3.select(currentThis).append("div")
+        .attr("class", "bar-label")
+        .attr("width", "100%")
+        .selectAll("p").data(currentThis.dataset.labels.split(","))
+        .enter().append("p")
+          .html(function(d, i){
+            return "<div class = 'bubble' style = 'background:" + d3.rgb(d3.color(accent).darker(i * 0.4)) + "'></div>" + d;
+          });
+    }
+    else{
+      y.domain([0, d3.max(data, function(d) { return d.y; })]);
+
+      svg.selectAll(".bar")
+          .data(data)
+        .enter().append("rect")
+          .attr("class", "bar")
+          .attr("x", function(d) { return x(d.label); })
+          .attr("width", x.bandwidth())
+          .style("fill", accent)
+          .attr("y", function(d) { return y(d.y); })
+          .attr("height", function(d) { return height - y(d.y); });
+    }
   }
 
   //Labels for mouseover
@@ -125,11 +159,12 @@ var barCharts = d3.selectAll(".barchart").each(function(){
       data = [];
 
       csvd.split("\n").forEach(function(d){
-        var temp = d.split(",");
+        var temp = d.split(","),
+            slice = temp.slice(1);
         if(temp[0]){
           total += parseInt(temp[1]);
           data.push({
-            y: parseInt(temp[1]),
+            y: (slice.length > 1 ? slice.map(function(d){return parseInt(d);}) : parseInt(temp[1])),
             label: temp[0]
           });
         }

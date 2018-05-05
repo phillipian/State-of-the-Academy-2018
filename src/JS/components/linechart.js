@@ -53,8 +53,6 @@ function drawGraph(thisNode, data, total, width, height, accent, tooltip, bisect
     .append("g")
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-  console.log(data);
-
   //x.domain([xExtent[0] - (xRange * 0.05), xExtent[1] + (xRange * 0.05)]);
   x.domain(data.map(function(d) { return "" + d.x; }));
   y.domain([0, d3.max(data, function(d) { return d3.max(d.y); })]); //TODO: Replace d.y with Math.max of all ys
