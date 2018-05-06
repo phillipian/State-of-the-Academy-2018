@@ -27,24 +27,32 @@ function drawGraph(thisNode, data, total, width, height, accent, tooltip, bisect
 
   thisNode.select('svg').selectAll("*").remove();
 
+  //x.domain([xExtent[0] - (xRange * 0.05), xExtent[1] + (xRange * 0.05)]);
+  x.domain(data.map(function(d) { return "" + d.x; }));
+  y.domain([0, d3.max(data, function(d) { return d3.max(d.y); })]); //TODO: Replace d.y with Math.max of all ys
+  x.invert = d3.scaleQuantize().domain(x.range()).range(x.domain());
+
   var svg = thisNode.select("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
     .on("mousemove", function(){
       var x0 = x.invert(d3.mouse(this)[0]),
-          i = bisector(data, x0, 1),
-          d0 = data[i - 1],
-          d1 = data[i];
+          d;
 
-      if(d0 && d1){
-        var d = x0 - d0.x > d1.x - x0 ? d1 : d0;
-        if(numLines > 1) tooltipText = generateTooltipMultiline({title: d.x, responses: d.y, colors: colors, total: total});
-        else tooltipText = generateTooltip({title: d.x, responses: d.y, percentage: d.y / total});
-        tooltip.classed("hidden", false).html(tooltipText);
-
-        tooltip.style("left", x(d.x) + margin.left - Math.round(tooltip.node().offsetWidth / 2) + "px")
-          .style("top", y(d3.max(d.y)) - Math.round(tooltip.node().offsetHeight) - 12 + margin.top + "px");
+      for(var i = 0; i < data.length; i++) {
+        if(data[i].x == x0) {
+          d = data[i];
+          break;
+        }
       }
+
+      if(numLines > 1) tooltipText = generateTooltipMultiline({title: d.x, responses: d.y, colors: colors, total: total});
+      else tooltipText = generateTooltip({title: d.x, responses: d.y, percentage: d.y / total});
+      tooltip.classed("hidden", false).html(tooltipText);
+
+      tooltip.style("left", x(d.x) + margin.left - Math.round(tooltip.node().offsetWidth / 2) + "px")
+        .style("top", y(d3.max(d.y)) - Math.round(tooltip.node().offsetHeight) - 12 + margin.top + "px");
+
     })
     .on("mouseout", function(d){
       var e = d3.event.toElement;
@@ -52,10 +60,6 @@ function drawGraph(thisNode, data, total, width, height, accent, tooltip, bisect
     })
     .append("g")
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-  //x.domain([xExtent[0] - (xRange * 0.05), xExtent[1] + (xRange * 0.05)]);
-  x.domain(data.map(function(d) { return "" + d.x; }));
-  y.domain([0, d3.max(data, function(d) { return d3.max(d.y); })]); //TODO: Replace d.y with Math.max of all ys
 
   for(var i = 0; i < numLines; i++){
     // Add the line path.

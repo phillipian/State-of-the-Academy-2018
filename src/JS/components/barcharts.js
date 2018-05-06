@@ -82,7 +82,7 @@ function drawBarChart(currentThis, data, total){
         .attr("height", function(d) { return height - y(d.value); })
         .attr("fill", function(d, i) { return d3.rgb(d3.color(accent).brighter(i)); });
 
-    svg.append("div")
+    d3.select(currentThis).append("div")
       .attr("class", "bar-label")
       .attr("width", "100%")
       .selectAll("p").data(currentThis.dataset.labels.split(","))
