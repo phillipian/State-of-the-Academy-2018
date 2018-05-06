@@ -24,6 +24,7 @@ function drawBarChart(currentThis, data, total){
   if("leftmargin" in currentThis.dataset) marginHorizontal.left = parseInt(currentThis.dataset.leftmargin);
 
   d3.select(currentThis).select('svg').selectAll("*").remove();
+  d3.select(currentThis).select('.bar-label').remove();
 
   svg = d3.select(currentThis).select("svg")
     .attr("width", width + marginHorizontal.left + marginHorizontal.right)
@@ -81,7 +82,7 @@ function drawBarChart(currentThis, data, total){
         .attr("height", function(d) { return height - y(d.value); })
         .attr("fill", function(d, i) { return d3.rgb(d3.color(accent).brighter(i)); });
 
-    d3.select(currentThis).append("div")
+    svg.append("div")
       .attr("class", "bar-label")
       .attr("width", "100%")
       .selectAll("p").data(currentThis.dataset.labels.split(","))
