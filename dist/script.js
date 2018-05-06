@@ -134,6 +134,8 @@ function drawBarChart(currentThis, data, total){
     y = d3.scaleLinear()
         .rangeRound([height, 0]);
 
+    var colors = currentThis.dataset.colors.split(",");
+
     var keys = [];
     for(var i = 0; i < data[0].y.length; i++) keys.push(i);
 
@@ -153,7 +155,7 @@ function drawBarChart(currentThis, data, total){
         .attr("y", function(d) { return y(d.value); })
         .attr("width", x1.bandwidth())
         .attr("height", function(d) { return height - y(d.value); })
-        .attr("fill", function(d, i) { return d3.rgb(d3.color(accent).brighter(i)); });
+        .attr("fill", function(d, i) { return colors[i]; });
 
     d3.select(currentThis).append("div")
       .attr("class", "bar-label")
@@ -161,7 +163,7 @@ function drawBarChart(currentThis, data, total){
       .selectAll("p").data(currentThis.dataset.labels.split(","))
       .enter().append("p")
         .html(function(d, i){
-          return "<div class = 'bubble' style = 'background:" + d3.rgb(d3.color(accent).brighter(i)) + "'></div>" + d;
+          return "<div class = 'bubble' style = 'background:" + colors[i] + "'></div>" + d;
         });
   }
   else{
@@ -180,12 +182,13 @@ function drawBarChart(currentThis, data, total){
       })]).nice();
 
       var index = 0;
+      var colors = currentThis.dataset.colors.split(",");
 
       svg.append("g")
         .selectAll("g")
         .data(d3.stack().keys([0,1,2])(data))
         .enter().append("g")
-          .attr("fill", function(d, i){return d3.rgb(d3.color(accent).darker(i * 0.4));})
+          .attr("fill", function(d, i){return colors[i];})
         .selectAll("rect")
         .data(function(d) {return d; })
         .enter().append("rect")
@@ -200,7 +203,7 @@ function drawBarChart(currentThis, data, total){
         .selectAll("p").data(currentThis.dataset.labels.split(","))
         .enter().append("p")
           .html(function(d, i){
-            return "<div class = 'bubble' style = 'background:" + d3.rgb(d3.color(accent).darker(i * 0.4)) + "'></div>" + d;
+            return "<div class = 'bubble' style = 'background:" + colors[i] + "'></div>" + d;
           });
     }
     else{
@@ -642,7 +645,7 @@ var percentageSliders = d3.selectAll(".percentage-slider").each(function(){
 var pieCharts = d3.selectAll(".pie").each(function(){
   var responses = this.dataset.responses.split(","),
       labels = this.dataset.labels.split(","),
-      accent = d3.color(this.dataset.accent).brighter(1);
+      colors = this.dataset.colors.split(",");
 
   var width = 300,
       height = 300,
@@ -651,15 +654,12 @@ var pieCharts = d3.selectAll(".pie").each(function(){
   var total = 0;
   var piedata = responses.map(function(d, i){
     total += parseInt(d);
-    if(i != 0) accent = d3.color(accent.darker());
     return {
       label: labels[i],
       value: parseInt(d),
-      color: d3.rgb(accent)
+      color: colors[i]
     };
   });
-
-  var colors = d3.scaleOrdinal(d3.schemeCategory20c);
 
   var pie = d3.pie()
     .value(function(d){

@@ -5,7 +5,7 @@
 var pieCharts = d3.selectAll(".pie").each(function(){
   var responses = this.dataset.responses.split(","),
       labels = this.dataset.labels.split(","),
-      accent = d3.color(this.dataset.accent).brighter(1);
+      colors = this.dataset.colors.split(",");
 
   var width = 300,
       height = 300,
@@ -14,15 +14,12 @@ var pieCharts = d3.selectAll(".pie").each(function(){
   var total = 0;
   var piedata = responses.map(function(d, i){
     total += parseInt(d);
-    if(i != 0) accent = d3.color(accent.darker());
     return {
       label: labels[i],
       value: parseInt(d),
-      color: d3.rgb(accent)
+      color: colors[i]
     };
   });
-
-  var colors = d3.scaleOrdinal(d3.schemeCategory20c);
 
   var pie = d3.pie()
     .value(function(d){
