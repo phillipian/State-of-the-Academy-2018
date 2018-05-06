@@ -316,6 +316,13 @@ html(lang='en')
             br
             h3 How often do you consume drugs or alcohol on campus?
             +vertical_barchart("frequency-drugs", accent_color, 250, "./assets/data/drugs/frequency.csv", "", "Responses")
+            h3 Marijuana usage by class
+            p From left to right: 2018, 2019, 2020, 2021
+            #marijuana-class
+              +pie_chart("marijuana-class-2018", "77,7,55,151", "Yes (on and off campus),Yes (on campus),Yes (off campus),No", "#eb431c,#d76904,#f59050,#f5b185", 75)
+              +pie_chart("marijuana-class-2019", "65,9,29,182", "Yes (on and off campus),Yes (on campus),Yes (off campus),No", "#eb431c,#d76904,#f59050,#f5b185", 75)
+              +pie_chart("marijuana-class-2020", "45,5,24,201", "Yes (on and off campus),Yes (on campus),Yes (off campus),No", "#eb431c,#d76904,#f59050,#f5b185", 75)
+              +pie_chart("marijuana-class-2021", "11,1,16,168", "Yes (on and off campus),Yes (on campus),Yes (off campus),No", "#eb431c,#d76904,#f59050,#f5b185", 75)
             br
             hr
           #discipline.section

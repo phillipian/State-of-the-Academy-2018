@@ -644,11 +644,10 @@ var percentageSliders = d3.selectAll(".percentage-slider").each(function(){
 var pieCharts = d3.selectAll(".pie").each(function(){
   var responses = this.dataset.responses.split(","),
       labels = this.dataset.labels.split(","),
-      colors = this.dataset.colors.split(",");
-
-  var width = 300,
-      height = 300,
-      radius = 150;
+      colors = this.dataset.colors.split(","),
+      width = parseInt(this.dataset.radius) * 2 || 300,
+      height = parseInt(this.dataset.radius) * 2 || 300,
+      radius = parseInt(this.dataset.radius) || 150;
 
   var total = 0;
   var piedata = responses.map(function(d, i){
@@ -667,17 +666,19 @@ var pieCharts = d3.selectAll(".pie").each(function(){
 
   var arc = d3.arc()
     .outerRadius(radius)
-    .innerRadius(radius / 2);
+    .innerRadius(0);
 
-  var tooltip = d3.select(this.firstChild),
+  var tooltip = d3.select(this).select(".tooltip"),
       tooltipText,
       mouse;
 
   var currentElement = this;
 
+  d3.select(this).style("width", width).style("margin", "20px auto");
+
   //Add pieChart
   var myChart = d3.select(this).append("svg")
-    .attr("width", "100%")
+    .attr("width", width)
     .attr("height", height)
     .append("g")
       .attr("transform", "translate(" + (width - radius) + "," + (height - radius) + ")")
@@ -705,7 +706,7 @@ var pieCharts = d3.selectAll(".pie").each(function(){
   //Add labels underneath pie chart
   d3.select(this).append("div")
     .attr("class", "pie-label")
-    .attr("width", "100%")
+    .attr("width", width)
     .selectAll("p").data(piedata)
     .enter().append("p")
       .html(function(d, i){

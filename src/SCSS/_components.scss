@@ -135,10 +135,19 @@
 // ** PIE CHART **
 .pie{
   margin: 20px auto;
-  width: 300px;
   position: relative;
   .tooltip{
     transition: none;
+  }
+}
+
+#marijuana-class{
+  width: 100%;
+  text-align: center;
+
+  .pie{
+    display: inline-block;
+    margin-left: 10px;
   }
 }
 
