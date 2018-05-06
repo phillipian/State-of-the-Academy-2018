@@ -13,16 +13,13 @@ function generateTooltipMultiline(json) {
       color: json.colors[i]
     };
   });
-  json.responses.sort(function(a, b){
-    return b.data - a.data;
-  });
 
   for(var i = 0; i < json.responses.length; i++){
-    responseStr += "<div class = 'bubble' style = 'background:" + json.responses[i].color + "'></div> <span>" + json.responses[i].data + "</span><br>";
-    percentageStr += "<div class = 'bubble' style = 'background:" + json.responses[i].color + "'></div> <span>" + (json.responses[i].data * 100 / json.total).toFixed(1) + "%</span><br>";
+    responseStr += "<div class = 'bubble' style = 'background:" + json.responses[i].color + "'></div> <span>" + json.labels[i] + ": " + json.responses[i].data + "</span><br>";
+    percentageStr += "<div class = 'bubble' style = 'background:" + json.responses[i].color + "'></div> <span>" + json.labels[i] + ": " + (json.responses[i].data * 100 / json.total).toFixed(1) + "%</span><br>";
   }
 
-  return "<h4>" + json.title + "</h4><p>Responses:</p>" + responseStr + "<p>Percentage:</p>" + percentageStr;
+  return "<h4>" + json.title + "</h4><p>Responses:</p>" + responseStr + "<br><p>Percentage (for each category):</p>" + percentageStr;
 }
 
 $(document).ready(function(){
@@ -307,10 +304,12 @@ var dataForGraphs = [],
     colorsForGraphs = [],
     numLinesGraphs = [];
 
-function drawGraph(thisNode, data, total, width, height, accent, tooltip, bisector, xLabel, yLabel, scatter, numLines, colors, shade){
+function drawGraph(currentThis, data, total, width, height, accent, tooltip, bisector, xLabel, yLabel, scatter, numLines, colors, shade){
   var x = d3.scalePoint().rangeRound([0, width]).padding(0.1);
   var y = d3.scaleLinear().rangeRound([height, 0]);
   var tooltipText;
+
+  thisNode = d3.select(currentThis);
 
   //Create the line
   var lines = [],
@@ -345,7 +344,7 @@ function drawGraph(thisNode, data, total, width, height, accent, tooltip, bisect
         }
       }
 
-      if(numLines > 1) tooltipText = generateTooltipMultiline({title: d.x, responses: d.y, colors: colors, total: total});
+      if(numLines > 1) tooltipText = generateTooltipMultiline({title: d.x, responses: d.y, colors: colors, total: total, labels: currentThis.dataset.labels.split(",")});
       else tooltipText = generateTooltip({title: d.x, responses: d.y, percentage: d.y / total});
       tooltip.classed("hidden", false).html(tooltipText);
 
@@ -389,7 +388,6 @@ function drawGraph(thisNode, data, total, width, height, accent, tooltip, bisect
   }
 
   for(var i = 0; i < numLines; i++){
-    //Add circles for each data point
     svg.selectAll(".dot-" + i)
       .data(data)
       .enter().append("circle")
@@ -439,13 +437,14 @@ d3.selectAll(".line_chart").each(function(){
       xLabel = this.dataset.x,
       yLabel = this.dataset.y,
       tooltip = d3.select(this.firstChild),
-      numLines = this.dataset.lines;
+      numLines = this.dataset.lines,
+      currentThis = this;
 
   var data = [],
       total = 0;
 
   var colors = [];
-  for(var i = 0; i < numLines; i++) colors.push(d3.color(accent.darker(i)));
+  for(var i = 0; i < numLines; i++) colors.push(d3.color(accent.darker(i * 1.5 - 1)));
 
   $.ajax({
     url: csv,
@@ -477,7 +476,7 @@ d3.selectAll(".line_chart").each(function(){
 
       thisNode.append("svg");
 
-      drawGraph(thisNode, data, total, width, height, accent, tooltip, bisector, xLabel, yLabel, currentElement.dataset.scatter, numLines, colors, currentElement.dataset.shade);
+      drawGraph(currentThis, data, total, width, height, accent, tooltip, bisector, xLabel, yLabel, currentElement.dataset.scatter, numLines, colors, currentElement.dataset.shade);
 
       if(numLines > 1){
         var labels = currentElement.dataset.labels.split(",");
@@ -722,7 +721,7 @@ d3.select(window).on('resize', function(){
           width = d3.select("#sections").node().offsetWidth - margin.left - margin.right,
           height = parseInt(this.dataset.height) - margin.top - margin.bottom;
 
-      drawGraph(thisNode, dataForGraphs[i], totalForGraphs[i], width, height, this.dataset.accent, d3.select(this.firstChild), bisectors[i], this.dataset.x, this.dataset.y, this.dataset.scatter, numLinesGraphs[i], colorsForGraphs[i], this.dataset.shade);
+      drawGraph(this, dataForGraphs[i], totalForGraphs[i], width, height, this.dataset.accent, d3.select(this.firstChild), bisectors[i], this.dataset.x, this.dataset.y, this.dataset.scatter, numLinesGraphs[i], colorsForGraphs[i], this.dataset.shade);
     });
 
     d3.selectAll(".barchart").each(function(d, i){

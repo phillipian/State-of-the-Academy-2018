@@ -8,10 +8,12 @@ var dataForGraphs = [],
     colorsForGraphs = [],
     numLinesGraphs = [];
 
-function drawGraph(thisNode, data, total, width, height, accent, tooltip, bisector, xLabel, yLabel, scatter, numLines, colors, shade){
+function drawGraph(currentThis, data, total, width, height, accent, tooltip, bisector, xLabel, yLabel, scatter, numLines, colors, shade){
   var x = d3.scalePoint().rangeRound([0, width]).padding(0.1);
   var y = d3.scaleLinear().rangeRound([height, 0]);
   var tooltipText;
+
+  thisNode = d3.select(currentThis);
 
   //Create the line
   var lines = [],
@@ -46,7 +48,7 @@ function drawGraph(thisNode, data, total, width, height, accent, tooltip, bisect
         }
       }
 
-      if(numLines > 1) tooltipText = generateTooltipMultiline({title: d.x, responses: d.y, colors: colors, total: total});
+      if(numLines > 1) tooltipText = generateTooltipMultiline({title: d.x, responses: d.y, colors: colors, total: total, labels: currentThis.dataset.labels.split(",")});
       else tooltipText = generateTooltip({title: d.x, responses: d.y, percentage: d.y / total});
       tooltip.classed("hidden", false).html(tooltipText);
 
@@ -90,7 +92,6 @@ function drawGraph(thisNode, data, total, width, height, accent, tooltip, bisect
   }
 
   for(var i = 0; i < numLines; i++){
-    //Add circles for each data point
     svg.selectAll(".dot-" + i)
       .data(data)
       .enter().append("circle")
@@ -140,13 +141,14 @@ d3.selectAll(".line_chart").each(function(){
       xLabel = this.dataset.x,
       yLabel = this.dataset.y,
       tooltip = d3.select(this.firstChild),
-      numLines = this.dataset.lines;
+      numLines = this.dataset.lines,
+      currentThis = this;
 
   var data = [],
       total = 0;
 
   var colors = [];
-  for(var i = 0; i < numLines; i++) colors.push(d3.color(accent.darker(i)));
+  for(var i = 0; i < numLines; i++) colors.push(d3.color(accent.darker(i * 1.5 - 1)));
 
   $.ajax({
     url: csv,
@@ -178,7 +180,7 @@ d3.selectAll(".line_chart").each(function(){
 
       thisNode.append("svg");
 
-      drawGraph(thisNode, data, total, width, height, accent, tooltip, bisector, xLabel, yLabel, currentElement.dataset.scatter, numLines, colors, currentElement.dataset.shade);
+      drawGraph(currentThis, data, total, width, height, accent, tooltip, bisector, xLabel, yLabel, currentElement.dataset.scatter, numLines, colors, currentElement.dataset.shade);
 
       if(numLines > 1){
         var labels = currentElement.dataset.labels.split(",");

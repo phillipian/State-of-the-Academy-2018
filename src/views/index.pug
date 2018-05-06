@@ -249,6 +249,9 @@ html(lang='en')
             h3 Do you feel alone on campus?
             +stacked_barchart("alone", "#2daa64,#58cc8b,#a1ffc7", 300, "./assets/data/wellness/alone.csv", "", "Responses", "Yes (always),Yes (regularly),Yes (sometimes)")
             br
+            h3 Sleep by class. 
+            +line_chart("chart2", accent_color, 300, "Amount of Sleep", "Responses", "./assets/data/wellness/sleep-class.csv", "false", 4, "2018,2019,2020,2021", "false")
+            br
             hr
           #sex.section
             -var accent_color = "#E40066"

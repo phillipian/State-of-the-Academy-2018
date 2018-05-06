@@ -13,14 +13,11 @@ function generateTooltipMultiline(json) {
       color: json.colors[i]
     };
   });
-  json.responses.sort(function(a, b){
-    return b.data - a.data;
-  });
 
   for(var i = 0; i < json.responses.length; i++){
-    responseStr += "<div class = 'bubble' style = 'background:" + json.responses[i].color + "'></div> <span>" + json.responses[i].data + "</span><br>";
-    percentageStr += "<div class = 'bubble' style = 'background:" + json.responses[i].color + "'></div> <span>" + (json.responses[i].data * 100 / json.total).toFixed(1) + "%</span><br>";
+    responseStr += "<div class = 'bubble' style = 'background:" + json.responses[i].color + "'></div> <span>" + json.labels[i] + ": " + json.responses[i].data + "</span><br>";
+    percentageStr += "<div class = 'bubble' style = 'background:" + json.responses[i].color + "'></div> <span>" + json.labels[i] + ": " + (json.responses[i].data * 100 / json.total).toFixed(1) + "%</span><br>";
   }
 
-  return "<h4>" + json.title + "</h4><p>Responses:</p>" + responseStr + "<p>Percentage:</p>" + percentageStr;
+  return "<h4>" + json.title + "</h4><p>Responses:</p>" + responseStr + "<br><p>Percentage (for each category):</p>" + percentageStr;
 }
