@@ -180,17 +180,29 @@ function drawBarChart(currentThis, data, total){
 
       var index = 0;
       var colors = currentThis.dataset.colors.split(",");
+      var keys = [];
+      for(var i = 0; i < data[0].y.length; i++) keys.push(i);
+
+      console.log(d3.stack().keys(keys)(data));
 
       svg.append("g")
         .selectAll("g")
-        .data(d3.stack().keys([0,1,2])(data))
+        .data(d3.stack().keys(keys)(data))
         .enter().append("g")
           .attr("fill", function(d, i){return colors[i];})
         .selectAll("rect")
         .data(function(d) {return d; })
         .enter().append("rect")
           .attr("x", function(d) { return x(d.data.label); })
-          .attr("y", function(d, i) { if(index == data[0].y.length) index = 0; return y((index == 0 ? 0 : d.data.y[index - 1]) + d.data.y[index++]); })
+          .attr("y", function(d, i) {
+            //console.log(d[1]);
+            if(index == data[0].y.length) index = 0;
+            var heightToReturn = d.data.y[index];
+            for(var j = index; j > 0; j--) heightToReturn += d.data.y[j - 1];
+            //console.log(heightToReturn + d.data.y[index]);
+            index++;
+            return y(heightToReturn);
+          })
           .attr("height", function(d, i) { if(index == data[0].y.length) index = 0;return height - y(d.data.y[index++]); })
           .attr("width", x.bandwidth());
 
@@ -277,9 +289,9 @@ var barCharts = d3.selectAll(".barchart").each(function(){
         var temp = d.split(","),
             slice = temp.slice(1);
         if(temp[0]){
-          total += parseInt(temp[1]);
+          total += parseFloat(temp[1]);
           data.push({
-            y: (slice.length > 1 ? slice.map(function(d){return parseInt(d);}) : parseInt(temp[1])),
+            y: (slice.length > 1 ? slice.map(function(d){return parseFloat(d);}) : parseFloat(temp[1])),
             label: temp[0]
           });
         }

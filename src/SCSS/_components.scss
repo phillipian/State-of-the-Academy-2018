@@ -141,7 +141,7 @@
   }
 }
 
-#marijuana-class{
+.pie-center{
   width: 100%;
   text-align: center;
 
@@ -157,6 +157,7 @@
   box-sizing: border-box;
   margin-top: 10px;
   position: relative;
+  border: 1px solid $black;
   .left, .right{
     padding: 15px 0;
     box-sizing: border-box;
