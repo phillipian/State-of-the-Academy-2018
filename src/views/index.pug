@@ -97,46 +97,7 @@ html(lang='en')
             h2 Wellness
             p Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC.
             br
-            h3 On average, how many hours of sleep do you get per night?
-            +line_chart("chart", accent_color, 300, "GPA", "Respondents", "./assets/data/wellness/sleep.csv", "false", 1, "", "true")
-            h3 Do you feel insecure about your body, physical health, and/or appearance?
-            +stacked_barchart("insecure", "#2daa64,#58cc8b,#a1ffc7", 300, "./assets/data/wellness/insecurity.csv", "", "Responses", "Yes (always),Yes (regularly),Yes (sometimes)")
-            br
-            h3 Do you feel insecure about your academic ability and/or intelligence?
-            +stacked_barchart("insecure-intelligence", "#2daa64,#58cc8b,#a1ffc7", 300, "./assets/data/wellness/insecurity-intelligence.csv", "", "Responses", "Yes (always),Yes (regularly),Yes (sometimes)")
-            br 
-            h3 Have you ever been diagnosed with anxiety?
-            +horizontal_barchart("anxiety", accent_color, 200, "./assets/data/wellness/anxiety.csv", "", "Responses", "150")
-            h3 Have you ever been diagnosed with depression?
-            +horizontal_barchart("depression", accent_color, 200, "./assets/data/wellness/depression.csv", "", "Responses", "150")
-            h3 Have you ever had, or do currently have, an eating disorder?
-            +horizontal_barchart("eating", accent_color, 200, "./assets/data/wellness/eating.csv", "", "Responses", "150")
-            h3 Have you ever engaged, or do you currently engage, in self-harm?
-            +horizontal_barchart("self-harm", accent_color, 250, "./assets/data/wellness/self-harm.csv", "", "Responses", "175")
-            h3 Generally speaking, do you consider yourself happy at Andover?
-            +percentage_slider("are-you-happy", 829, 225, accent_color)
-            br
-            h3 In general, do you think that Andover students are happy?
-            +percentage_slider("are-andover-students-happy", 665, 389, accent_color)
-            br
-            h3 What social media platforms do you use at Andover?
-            p <i>Note: respondents may have selected more than one</i>
-            .multipane#social-media(data-labels = "2018,2019,2020,2021,Everyone")
-              +vertical_barchart("social-media-2018", accent_color, 250, "./assets/data/wellness/social-media-2018.csv", "", "Responses")
-              +vertical_barchart("social-media-2019", accent_color, 250, "./assets/data/wellness/social-media-2019.csv", "", "Responses")
-              +vertical_barchart("social-media-2020", accent_color, 250, "./assets/data/wellness/social-media-2020.csv", "", "Responses")
-              +vertical_barchart("social-media-2021", accent_color, 250, "./assets/data/wellness/social-media-2021.csv", "", "Responses")
-              +vertical_barchart("social-media", accent_color, 250, "./assets/data/wellness/social-media.csv", "", "Responses")
-            h3 Have you ever been to Graham House or the Sykes Wellness Center to see a counselor?
-            +percentage_slider("counselors", 466, 588, accent_color)
-            br
-            h3 Have you ever been bullied or hazed while at Andover?
-            +horizontal_barchart("bullying", accent_color, 200, "./assets/data/wellness/bullying.csv", "", "Responses", "125")
-            h3 Do you feel alone on campus?
-            +stacked_barchart("alone", "#2daa64,#58cc8b,#a1ffc7", 300, "./assets/data/wellness/alone.csv", "", "Responses", "Yes (always),Yes (regularly),Yes (sometimes)")
-            br
-            h3 Sleep by class. 
-            +line_chart("chart2", accent_color, 300, "Amount of Sleep", "Responses", "./assets/data/wellness/sleep-class.csv", "false", 4, "2018,2019,2020,2021", "false")
+            include sections/wellness.pug
             br
             hr
           #sex.section
@@ -154,52 +115,7 @@ html(lang='en')
             h2 Drugs
             p A piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC.
             br
-            h3 Juuling by the years
-            +text_fact("28.86%", "of 2016-2017 respondents have juuled")
-            +text_fact("39.10%", "of 2017-2018 respondents have juuled")
-            h3 Have you ever used hallucinogens or hard drugs?
-            p <i>Note: respondents may have selected more than one</i>
-            +vertical_barchart("drugs", accent_color, 250, "./assets/data/drugs/drug.csv", "Drug", "Responses")
-            h3 Have you ever used pharmaceutical drugs (i.e. "study drugs") in the hopes of enhancing academic performance at Andover?
-            +vertical_barchart("study-drugs", accent_color, 250, "./assets/data/drugs/study-drugs.csv", "Drug", "Responses")
-            h3 Have you ever sold someone drugs, alcohol, or your prescription medication?
-            +vertical_barchart("dealing", accent_color, 250, "./assets/data/drugs/dealing.csv", "Drug", "Responses")
-            //TODO: INVERT COLORS
-            h3 Have you ever attended a school-sponsored event while under the influence of drugs or alcohol?
-            +percentage_slider("school-sponsored-drugs", 226, 820, accent_color)
-            br
-            h3 How often do you consume drugs or alcohol on campus?
-            +vertical_barchart("frequency-drugs", accent_color, 250, "./assets/data/drugs/frequency.csv", "", "Responses")
-            h3 Marijuana usage by class.
-            p From left to right: 2018, 2019, 2020, 2021
-            .pie-center
-              +pie_chart("marijuana-class-2018", "77,7,55,151", "Yes (on and off campus),Yes (on campus),Yes (off campus),No", "#eb431c,#d76904,#f59050,#f5b185", 75)
-              +pie_chart("marijuana-class-2019", "65,9,29,182", "Yes (on and off campus),Yes (on campus),Yes (off campus),No", "#eb431c,#d76904,#f59050,#f5b185", 75)
-              +pie_chart("marijuana-class-2020", "45,5,24,201", "Yes (on and off campus),Yes (on campus),Yes (off campus),No", "#eb431c,#d76904,#f59050,#f5b185", 75)
-              +pie_chart("marijuana-class-2021", "11,1,16,168", "Yes (on and off campus),Yes (on campus),Yes (off campus),No", "#eb431c,#d76904,#f59050,#f5b185", 75)
-            h3 Alcohol usage by class.
-            p From left to right: 2018, 2019, 2020, 2021
-            .pie-center
-              +pie_chart("alcohol-class-2018", "113,2,119,56", "Yes (on and off campus),Yes (on campus),Yes (off campus),No", "#eb431c,#d76904,#f59050,#f5b185", 75)
-              +pie_chart("alcohol-class-2019", "96,3,104,82", "Yes (on and off campus),Yes (on campus),Yes (off campus),No", "#eb431c,#d76904,#f59050,#f5b185", 75)
-              +pie_chart("alcohol-class-2020", "49,0,125,101", "Yes (on and off campus),Yes (on campus),Yes (off campus),No", "#eb431c,#d76904,#f59050,#f5b185", 75)
-              +pie_chart("alcohol-class-2021", "15,2,73,106", "Yes (on and off campus),Yes (on campus),Yes (off campus),No", "#eb431c,#d76904,#f59050,#f5b185", 75)
-            h3 Tobacco usage by class.
-            p From left to right: 2018, 2019, 2020, 2021
-            .pie-center
-              +pie_chart("tobacco-class-2018", "52,2,46,290", "Yes (on and off campus),Yes (on campus),Yes (off campus),No", "#eb431c,#d76904,#f59050,#f5b185", 75)
-              +pie_chart("tobacco-class-2019", "49,5,22,285", "Yes (on and off campus),Yes (on campus),Yes (off campus),No", "#eb431c,#d76904,#f59050,#f5b185", 75)
-              +pie_chart("tobacco-class-2020", "28,1,21,275", "Yes (on and off campus),Yes (on campus),Yes (off campus),No", "#eb431c,#d76904,#f59050,#f5b185", 75)
-              +pie_chart("tobacco-class-2021", "9,1,6,196", "Yes (on and off campus),Yes (on campus),Yes (off campus),No", "#eb431c,#d76904,#f59050,#f5b185", 75)
-            h3 Juuling and E-Cig usage by class.
-            p From left to right: 2018, 2019, 2020, 2021
-            .pie-center
-              +pie_chart("juuling-class-2018", "94,11,42,143", "Yes (on and off campus),Yes (on campus),Yes (off campus),No", "#eb431c,#d76904,#f59050,#f5b185", 75)
-              +pie_chart("juuling-class-2019", "75,15,28,167", "Yes (on and off campus),Yes (on campus),Yes (off campus),No", "#eb431c,#d76904,#f59050,#f5b185", 75)
-              +pie_chart("juuling-class-2020", "60,6,28,181", "Yes (on and off campus),Yes (on campus),Yes (off campus),No", "#eb431c,#d76904,#f59050,#f5b185", 75)
-              +pie_chart("juuling-class-2021", "23,12,15,146", "Yes (on and off campus),Yes (on campus),Yes (off campus),No", "#eb431c,#d76904,#f59050,#f5b185", 75)
-            h3 Alcohol usage by pressure to use alcohol.
-            +stacked_barchart("alcohol-pressure-usage", "#eb431c,#d76904,#f59050,#f5b185", 300, "./assets/data/drugs/alcohol-pressure-usage.csv", "Have you felt pressured to consume alcohol by your peers?", "Percentage from each category", "Yes (I have consumed alcohol on and off campus),Yes (on campus),Yes (off campus),No")
+            include sections/drugs.pug
             br
             hr
           #discipline.section
@@ -208,26 +124,7 @@ html(lang='en')
             h2 Discipline
             p Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC.
             br
-            h3 Have you ever sat before a Disciplinary Committee (DC)?
-            +percentage_slider("dc", 61, 982, accent_color)
-            br
-            h3 Have you ever committed a major offense without being caught? 
-            p (Major offenses include, but are not limited to: academic dishonesty, drugs and alcohol, cruising, gambling, and downloading/sharing sexually explicit content)
-            +percentage_slider("major-offense", 463, 580, accent_color)
-            br
-            h3 Do you think that the administration should have the right to search an entire dorm for contraband material?
-            +percentage_slider("dorm-search", 428, 615, accent_color)
-            br
-            h3 Do you support changes in room visit policies?
-            +pie_chart("room-visit", "24,92,927", "Yes (they should be stricter),No,Yes (they should be more lenient)", "#dc3d44,#fb5f66,#90111f")
-            h3 Have you ever had an illegal room visit?
-            +percentage_slider("ip", 381, 668, accent_color)
-            br
-            h3 Have you ever been sanctuaried?
-            +percentage_slider("been-sanctuaried", 61, 982, accent_color)
-            br
-            h3 Have you ever sanctuaried someone else?
-            +percentage_slider("sanctuaried-someone-else", 58, 985, accent_color)
+            include sections/discipline.pug
             br
       footer
         .left

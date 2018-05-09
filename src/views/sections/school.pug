@@ -1,27 +1,27 @@
 +text_fact("5.2", "was the average school-wide Winter 2017-2018 G.P.A")
+br
+br
 h3 What was your rounded Winter 2017-2018 (unweighted) G.P.A.?
 p <i>Note: If respondents were between two numbers, they were insttructed to round up to the next closest decimal — a 5.3 G.P.A. would round to a 5.4</i>
 +line_chart("chart", accent_color, 300, "GPA", "Respondents", "./assets/data/school/gpa.csv", "false", 1, "", "true")
+hr.dotted
 h3 How many hours do you spend on coursework outside of class each day?
 +vertical_barchart("coursework", accent_color, 200, "./assets/data/school/coursework.csv", "Time Spent", "Responses")
+hr.dotted
 h3 Do you think that grading disparities exist between teachers of the same subject at Andover?
 +percentage_slider("grading-disparities", 1032, 13, accent_color)
 br
 h3 In which department is there the largest grading disparity between teachers?
 +horizontal_barchart("grading-disparity-department", accent_color, 300, "./assets/data/school/grading-disparity.csv", "", "Responses", "170")
+hr.dotted
 h3 Have you ever switched teachers within the same course in order to attain a better grade?
 +percentage_slider("switching-teacher", 327, 718, accent_color)
-br
+hr.dotted
 h3 Do you think attending Andover affects your chances of attending a selective college?
 +pie_chart("selective-college", "532,442,71", "Yes (positively),Yes (negatively),No", "#14195C,#353f9a,#6d75b8")
+hr.dotted
 h3 Do you think that the majority of your teachers care about your health and well-being?
 +percentage_slider("teacher-wellbeing", 817, 228, accent_color)
-br
+hr.dotted
 h3 Has attending Andover affected your relationship with your family?
 +pie_chart("relationship-parents", "422,352,271", "Yes (positively),Yes (negatively),No", "#14195C,#353f9a,#6d75b8")
-//br
-//h3 Multipane Interface
-//.multipane#multipane-1(data-labels = "Line Chart,Scatter Plot,Multiline")
-  +line_chart("chart", accent_color, 300, "x-label", "y-label", "./assets/data/line_chart.csv", "false", 1, "false")
-  +line_chart("chart1", accent_color, 300, "x-label", "y-label", "./assets/data/line_chart.csv", "true", 1, "false")
-  +line_chart("chart2", accent_color, 300, "x-label", "y-label", "./assets/data/line_chart_1.csv", "false", 2, "line 1,line2", "true")

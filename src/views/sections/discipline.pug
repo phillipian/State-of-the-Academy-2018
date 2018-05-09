@@ -1,0 +1,31 @@
+h3 Have you ever sat before a Disciplinary Committee (DC)?
++percentage_slider("dc", 61, 982, accent_color)
+hr.dotted
+h3 Have you ever committed a major offense without being caught? 
+p (Major offenses include, but are not limited to: academic dishonesty, drugs and alcohol, cruising, gambling, and downloading/sharing sexually explicit content)
++percentage_slider("major-offense", 463, 580, accent_color)
+hr.dotted
+h3 Do you think that the administration should have the right to search an entire dorm for contraband material?
++percentage_slider("dorm-search", 428, 615, accent_color)
+hr.dotted
+h3 Do you support changes in room visit policies?
++pie_chart("room-visit", "24,92,927", "Yes (they should be stricter),No,Yes (they should be more lenient)", "#dc3d44,#fb5f66,#90111f")
+hr.dotted
+h3 Opinions on room visiting by sexual activity
+p Note: Information on whether respondents were sexually active or not is based upon the number of people respondents have engaged in sexual activity with. There was not a question on the State of the Academy specifically asking if respondents were sexually active.
++grouped_barchart("roomvisiting-sex", "#dc3d44,#fb5f66,#90111f", 300, "./assets/data/discipline/roomvisiting-sex.csv", "", "Percentage of that category", "Yes (room visiting policies should be stricter),No (they should remain the same),Yes (they should be more lenient)")
+hr.dotted
+h3 Have you ever had an illegal room visit?
++percentage_slider("ip", 381, 668, accent_color)
+hr.dotted
+h3 Have you ever been sanctuaried?
++percentage_slider("been-sanctuaried", 61, 982, accent_color)
+br
+h3 Have you ever sanctuaried someone else?
++percentage_slider("sanctuaried-someone-else", 58, 985, accent_color)
+hr.dotted
+h3 Cheating by class.
++vertical_barchart("cheating-class", accent_color, 300, "./assets/data/discipline/cheating-class.csv", "Class", "Percentage that has cheated")
+hr.dotted
+h3 Plagiarism by class.
++vertical_barchart("plagiarism-class", accent_color, 300, "./assets/data/discipline/plagiarism-class.csv", "Class", "Percentage that has plagiarized")
