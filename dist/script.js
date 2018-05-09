@@ -674,7 +674,7 @@ var pieCharts = d3.selectAll(".pie").each(function(){
   var pie = d3.pie()
     .value(function(d){
       return d.value;
-    });
+    }).sort(null);
 
   var arc = d3.arc()
     .outerRadius(radius)
