@@ -1,5 +1,5 @@
 mixin percentage_slider(id, yes_responses, no_responses, accent_color, invert) 
-  div(id = id class = "percentage-slider" data-yes = yes_responses data-no = no_responses)
+  div(id = id class = "percentage-slider" data-yes = yes_responses data-no = no_responses data-accent = accent_color)
     .tooltip.hidden
     - var width = 100 * yes_responses / (yes_responses + no_responses)
     if invert == "true"

@@ -237,10 +237,14 @@ function drawBarChart(currentThis, data, total){
 
     if(className == "barchart-horizontal") tooltip.style("left", x(d.y) + marginHorizontal.left + 12 + "px").style("top", y(d.label) - y.bandwidth() / 2 + marginHorizontal.top + "px");
     else tooltip.style("left", x(d.label) + (x.bandwidth() - tooltip.node().offsetWidth) / 4 + margin.left + "px").style("top", y(d.y) - Math.round(tooltip.node().offsetHeight) + margin.top - 12 + "px"); //TODO: for some reason this doesn't work properly
+
+    if(className == "barchart-horizontal" || className == "barchart-vertical") d3.select(this).style("fill", d3.rgb(d3.color(accent).brighter(0.5)));
   })
   .on("mouseout", function(d){
     var e = d3.event.toElement;
     if(e && e.parentNode.parentNode != this.parentNode && e.parentNode != this.parentNode && e != this.parentNode) tooltip.classed("hidden", true);
+
+    d3.select(this).style("fill", accent);
   });
 
   //Add x axis
@@ -623,6 +627,9 @@ var percentageSliders = d3.selectAll(".percentage-slider").each(function(){
   var htmlYes = generateTooltip({title: "Yes", responses: yesResponses, percentage: yesResponses / (yesResponses + noResponses)}),
       htmlNo = generateTooltip({title: "No", responses: noResponses, percentage: noResponses / (yesResponses + noResponses)});
 
+  var accent = this.dataset.accent,
+      lighterColor = d3.rgb(d3.color(accent).brighter(0.5));
+
   var tooltip = d3.select(this.firstChild);
 
   var yesX = parseInt(d3.select(this.children[1]).node().style.width.replace("%", ""));
@@ -633,9 +640,12 @@ var percentageSliders = d3.selectAll(".percentage-slider").each(function(){
       tooltip.classed("hidden", false).html(htmlYes)
         .style("left", "calc(" + Math.round(yesX / 2) + "% - " + Math.round(tooltip.node().offsetWidth / 2) + "px)")
         .style("top", "-" + (Math.round(tooltip.node().offsetHeight) + 10) + "px");
+
+      d3.select(this).style("background-color", lighterColor);
     })
     .on("mouseout", function(d){
       tooltip.classed("hidden", true);
+      d3.select(this).style("background-color", accent);
     });
 
   d3.select(this.children[2]) //If hovering over no
@@ -643,9 +653,12 @@ var percentageSliders = d3.selectAll(".percentage-slider").each(function(){
       tooltip.classed("hidden", false).html(htmlNo)
         .style("left", "calc(" + Math.round(yesX + noX / 2) + "% - " + Math.round(tooltip.node().offsetWidth / 2) + "px)")
         .style("top", "-" + (Math.round(tooltip.node().offsetHeight) + 10) + "px");
+
+      d3.select(this).style("background-color", "#f4f4f4");
     })
     .on("mouseout", function(d){
       tooltip.classed("hidden", true);
+      d3.select(this).style("background-color", "white");
     });
 });
 
@@ -711,9 +724,12 @@ var pieCharts = d3.selectAll(".pie").each(function(){
 
           tooltip.style("left", mouse[0] - Math.round(tooltip.node().offsetWidth / 2) + "px")
             .style("top", mouse[1] - Math.round(tooltip.node().offsetHeight) - 12 + "px");
+
+          d3.select(this).style("fill", d3.rgb(d3.color(d.data.color).brighter(0.5)));
         })
         .on("mouseout", function(d){
           tooltip.classed("hidden", true);
+          d3.select(this).style("fill", d.color);
         });
 
   //Add labels underneath pie chart

@@ -60,9 +60,12 @@ var pieCharts = d3.selectAll(".pie").each(function(){
 
           tooltip.style("left", mouse[0] - Math.round(tooltip.node().offsetWidth / 2) + "px")
             .style("top", mouse[1] - Math.round(tooltip.node().offsetHeight) - 12 + "px");
+
+          d3.select(this).style("fill", d3.rgb(d3.color(d.data.color).brighter(0.5)));
         })
         .on("mouseout", function(d){
           tooltip.classed("hidden", true);
+          d3.select(this).style("fill", d.color);
         });
 
   //Add labels underneath pie chart

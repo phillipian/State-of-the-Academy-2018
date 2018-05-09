@@ -104,6 +104,11 @@
 // ** BARCHARTS **
 .barchart{
   position: relative;
+  svg{
+    path{
+      transition: fill .2s ease;
+    }
+  }
 }
 
 // ** MULTIPANE **
@@ -139,6 +144,12 @@
   .tooltip{
     transition: none;
   }
+
+  svg{
+    path{
+      transition: background-color .2s ease;
+    }
+  }
 }
 
 .pie-label{
@@ -171,6 +182,7 @@
     display: inline-block;
     font-family: "gotham_bold";
     text-align: center;
+    transition: background-color .2s ease;
   }
   .right{
     color: white;
