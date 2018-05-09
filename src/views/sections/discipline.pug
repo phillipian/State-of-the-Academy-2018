@@ -1,5 +1,16 @@
 h3 Have you ever sat before a Disciplinary Committee (DC)?
 +percentage_slider("dc", 61, 982, accent_color)
+br
+h3 DCs by socio-economic class 
++vertical_barchart("dc-wealth", accent_color, 300, "./assets/data/discipline/dc-wealth.csv", "", "Percentage that has been DCed")
+h3 DCs by sex
++vertical_barchart("dc-sex", accent_color, 300, "./assets/data/discipline/dc-sex.csv", "", "Percentage that has been DCed")
+hr.dotted
+h3 Does the DC system effectively discipline students, by those who've been DCed?
++grouped_barchart("dc-effective", "#dc3d44,#fb5f66,#90111f", 300, "./assets/data/discipline/dc-effective.csv", "Have you sat before a DC?", "Percentage of that category", "Yes (DC system effectively disciplines students),No (discipline should be harsher),No (discipline should be more lenient)")
+br
+h3 Does the DC system effectively discipline students, by sex?
++grouped_barchart("dc-effective", "#dc3d44,#fb5f66,#90111f", 300, "./assets/data/discipline/dc-effective-sex.csv", "Sex", "Percentage of that category", "Yes (DC system effectively disciplines students),No (discipline should be harsher),No (discipline should be more lenient)")
 hr.dotted
 h3 Have you ever committed a major offense without being caught? 
 p (Major offenses include, but are not limited to: academic dishonesty, drugs and alcohol, cruising, gambling, and downloading/sharing sexually explicit content)
@@ -7,6 +18,10 @@ p (Major offenses include, but are not limited to: academic dishonesty, drugs an
 hr.dotted
 h3 Do you think that the administration should have the right to search an entire dorm for contraband material?
 +percentage_slider("dorm-search", 428, 615, accent_color)
+br
+h3 Should the school should be able search dorms, by alcohol consumption? 
++grouped_barchart("dorm-search-alcohol", "#dc3d44,#90111f", 300, "./assets/data/discipline/dorm-search-alcohol.csv", "Alcohol consumption status", "Percentage for each category", "Yes,No")
+br
 hr.dotted
 h3 Do you support changes in room visit policies?
 +pie_chart("room-visit", "24,92,927", "Yes (they should be stricter),No,Yes (they should be more lenient)", "#dc3d44,#fb5f66,#90111f")
