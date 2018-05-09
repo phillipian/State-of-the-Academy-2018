@@ -193,6 +193,19 @@
   }
 }
 
+.percentage-with-label{
+  width: 100%;
+  display: flex;
+  .label{
+    padding: 25px 10px 15px 0;
+    width: 70px;
+    text-align: right;
+  }
+  .percentage-slider{
+    flex: 1;
+  }
+}
+
 // ** TEXT FACT **
 .text_fact{
   display: inline-block;
