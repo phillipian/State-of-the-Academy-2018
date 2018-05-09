@@ -1,0 +1,43 @@
+h3 What is your political affiliation? 
++vertical_barchart("political-affiliation", accent_color, 200, "./assets/data/politics/affiliation.csv", "Political Affiliation", "Responses")
+h3 Do you believe that the United States should increase restrictions on immigration?
++percentage_slider("immigration", 256, 801, accent_color)
+br
+h3 Immigration beliefs by political affiliation.
++grouped_barchart("immigration-political", "#521A7E,#d1a8df", 300, "./assets/data/politics/immigration-political.csv", "Should the US increase immigration restrictions?", "Percentage per category", "Yes,No")
+br
+h3 Do you consider yourself a feminist?
++percentage_slider("feminism", 798, 259, accent_color)
+br
+h3 Feminism by gender.
+p Note: Percentages for certain categories may be skewed do to a low amount of responses.
++grouped_barchart("feminism-gender", "#521A7E,#d1a8df", 300, "./assets/data/politics/feminism-gender.csv", "Do you consider yourself a feminist?", "Percentage per category", "Yes,No")
+br
+h3 Do you believe a female should have the right to choose if she has an abortion?
++pie_chart("abortion", "777,249,31", "Yes (always),Yes (in some circumstances),No", "#521A7E,#a362ba,#d1a8df")
+h3 Do you think that gun control laws in the United States should change?
++pie_chart("gun-control", "932,95,30", "Yes (they should be stricter),No,Yes (they should be more lenient)", "#521A7E,#a362ba,#d1a8df")
+h3 Do you support All-Gender Housing at Andover?
++percentage_slider("all-gender-housing", 921, 136, accent_color)
+br
+h3 While at Andover, have you ever felt the need to censor yourself due to your political leaning?
++percentage_slider("censorship", 654, 403, accent_color)
+br
+h3 Self-censorship by political affiliation.
++grouped_barchart("censorship-politics", "#521A7E,#d1a8df", 300, "./assets/data/politics/censorship-politics.csv", "Have you censored yourself due to political leaning?", "Percentage by category", "Yes,No")
+br
+h3 Feminism and the Black Lives Matter movement.
++grouped_barchart("blm-feminism", "#521A7E,#d1a8df", 300, "./assets/data/politics/blm-feminism.csv", "", "Responses", "Yes (I support the BLM movement),No (I don't support the BLM movement)")
+br
+h3 Feminism and belief in a rape culture.
++grouped_barchart("feminism-rapeculture", "#521A7E,#d1a8df", 300, "./assets/data/politics/feminism-rapeculture.csv", "", "Responses", "Yes (I believe there is a rape culture at Andover),No (I don't believe there is a rape culture at Andover)")
+br
+h3 Belief in a rape culture by gender.
+p Note: Percentages for certain categories may be skewed do to a low amount of responses.
++grouped_barchart("rapeculture-gender", "#521A7E,#d1a8df", 300, "./assets/data/politics/rapeculture-gender.csv", "Is there a rape culture at Andover?", "Percentage of each gender", "Yes,No")
+br
+//TODO: redo this graph so it is easier to compare (4 pie charts)
+h3 Belief in reverse racism by grade
+p Reverse racism is “prejudice, discrimination, or antagonism on the basis of race directed against a member of a dominant or privileged racial group” (Oxford Dictionaries). 
++grouped_barchart("reverse-racism", "#521A7E,#d1a8df", 300, "./assets/data/politics/reverse-racism.csv", "", "Responses", "Yes (I believe that reverse racism exists),No (I don't believe that reverse racism exists)")
+br
