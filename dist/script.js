@@ -659,7 +659,8 @@ var pieCharts = d3.selectAll(".pie").each(function(){
       colors = this.dataset.colors.split(","),
       width = parseInt(this.dataset.radius) * 2 || 300,
       height = parseInt(this.dataset.radius) * 2 || 300,
-      radius = parseInt(this.dataset.radius) || 150;
+      radius = parseInt(this.dataset.radius) || 150,
+      name = this.dataset.name;
 
   var total = 0;
   var piedata = responses.map(function(d, i){
@@ -686,7 +687,7 @@ var pieCharts = d3.selectAll(".pie").each(function(){
 
   var currentElement = this;
 
-  d3.select(this).style("width", width).style("margin", "20px auto");
+  d3.select(this).style("width", width);
 
   //Add pieChart
   var myChart = d3.select(this).append("svg")
@@ -716,14 +717,17 @@ var pieCharts = d3.selectAll(".pie").each(function(){
         });
 
   //Add labels underneath pie chart
-  d3.select(this).append("div")
+  var pieLabel = d3.select(this).append("div")
     .attr("class", "pie-label")
-    .attr("width", width)
-    .selectAll("p").data(piedata)
-    .enter().append("p")
+    .style("width", width + "px");
+
+  if(name) pieLabel.append("h3").html(name);
+
+  pieLabel.selectAll("span").data(piedata)
+    .enter().append("span")
       .html(function(d, i){
         return "<div class = 'bubble' style = 'background:" + d.color + "'></div>" + d.label;
-      });
+      }).append("br");
 });
 
 var resizeId;
