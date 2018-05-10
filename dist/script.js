@@ -348,7 +348,7 @@ function drawGraph(currentThis, data, total, width, height, accent, tooltip, bis
 
   //x.domain([xExtent[0] - (xRange * 0.05), xExtent[1] + (xRange * 0.05)]);
   x.domain(data.map(function(d) { return "" + d.x; }));
-  y.domain([0, d3.max(data, function(d) { return d3.max(d.y); })]); //TODO: Replace d.y with Math.max of all ys
+  y.domain([0, d3.max(data, function(d) { return d3.max(d.y); })]);
   x.invert = d3.scaleQuantize().domain(x.range()).range(x.domain());
 
   var svg = thisNode.select("svg")
@@ -465,7 +465,7 @@ d3.selectAll(".line_chart").each(function(){
       total = 0;
 
   var colors = [];
-  for(var i = 0; i < numLines; i++) colors.push(d3.color(accent.darker(i * 1.5)));
+  for(var i = 0; i < numLines; i++) colors.push(d3.color(accent.brighter(i * 1.5)));
 
   $.ajax({
     url: csv,
@@ -474,11 +474,11 @@ d3.selectAll(".line_chart").each(function(){
       csvd.split("\n").map(function(d){
         var temp = d.split(",");
         if(temp[0]){
-          total += parseInt(temp[1]);
+          total += parseFloat(temp[1]);
           data.push({
             x: temp[0],
             y: temp.slice(1).map(function(element){
-              return parseInt(element)
+              return parseFloat(element)
             })
           });
         }

@@ -1,7 +1,9 @@
 h3 On average, how many hours of sleep do you get per night?
-+line_chart("chart", accent_color, 300, "GPA", "Respondents", "./assets/data/wellness/sleep.csv", "false", 1, "", "true")
-h3 Sleep by class. 
-+line_chart("chart2", accent_color, 300, "Amount of Sleep", "Responses", "./assets/data/wellness/sleep-class.csv", "false", 4, "2018,2019,2020,2021", "false")
+.multipane#sleep(data-labels = "2018,2019,2020,2021")
+  +line_chart("chart", accent_color, 300, "Amount of sleep in hours", "Respondents", "./assets/data/wellness/sleep-2018.csv", "false", 1, "", "true")
+  +line_chart("chart", accent_color, 300, "Amount of sleep in hours", "Respondents", "./assets/data/wellness/sleep-2019.csv", "false", 1, "", "true")
+  +line_chart("chart", accent_color, 300, "Amount of sleep in hours", "Respondents", "./assets/data/wellness/sleep-2020.csv", "false", 1, "", "true")
+  +line_chart("chart", accent_color, 300, "Amount of sleep in hours", "Respondents", "./assets/data/wellness/sleep-2021.csv", "false", 1, "", "true")
 hr.dotted
 h3 Do you feel insecure about your body, physical health, and/or appearance?
 +stacked_barchart("insecure", "#176f37,#22aa60,#a6e6ae", 300, "./assets/data/wellness/insecurity.csv", "", "Responses", "Yes (always),Yes (regularly),Yes (sometimes)")
