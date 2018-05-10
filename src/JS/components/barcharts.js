@@ -185,8 +185,8 @@ function drawBarChart(currentThis, data, total){
   .on("mouseout", function(d){
     if(d3.event.toElement.parentNode.className.indexOf("tooltip") == -1){
       tooltip.classed("hidden", true);
-      d3.select(this).style("fill", accent);
     }
+    d3.select(this).style("fill", accent);
   });
 
   //Add x axis
@@ -235,14 +235,14 @@ var barCharts = d3.selectAll(".barchart").each(function(){
   $.ajax({
     url: this.dataset.url,
     success: function (csvd) {
-      var total = 0,
+      var total = parseInt(currentThis.dataset.total || 0),
       data = [];
 
       csvd.split("\n").forEach(function(d){
         var temp = d.split(","),
             slice = temp.slice(1);
         if(temp[0]){
-          total += parseFloat(temp[1]);
+          if(currentThis.dataset.total == null) total += parseFloat(temp[1]);
           data.push({
             y: (slice.length > 1 ? slice.map(function(d){return parseFloat(d);}) : parseFloat(temp[1])),
             label: temp[0]

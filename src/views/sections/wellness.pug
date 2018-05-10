@@ -49,11 +49,11 @@ hr.dotted
 h3 What social media platforms do you use at Andover?
 p <i>Note: respondents may have selected more than one</i>
 .multipane#social-media(data-labels = "2018,2019,2020,2021,Everyone")
-  +vertical_barchart("social-media-2018", accent_color, 250, "./assets/data/wellness/social-media-2018.csv", "", "Responses")
-  +vertical_barchart("social-media-2019", accent_color, 250, "./assets/data/wellness/social-media-2019.csv", "", "Responses")
-  +vertical_barchart("social-media-2020", accent_color, 250, "./assets/data/wellness/social-media-2020.csv", "", "Responses")
-  +vertical_barchart("social-media-2021", accent_color, 250, "./assets/data/wellness/social-media-2021.csv", "", "Responses")
-  +vertical_barchart("social-media", accent_color, 250, "./assets/data/wellness/social-media.csv", "", "Responses")
+  +vertical_barchart("social-media-2018", accent_color, 250, "./assets/data/wellness/social-media-2018.csv", "", "Responses", "", "293")
+  +vertical_barchart("social-media-2019", accent_color, 250, "./assets/data/wellness/social-media-2019.csv", "", "Responses", "", "286")
+  +vertical_barchart("social-media-2020", accent_color, 250, "./assets/data/wellness/social-media-2020.csv", "", "Responses", "", "276")
+  +vertical_barchart("social-media-2021", accent_color, 250, "./assets/data/wellness/social-media-2021.csv", "", "Responses", "", "199")
+  +vertical_barchart("social-media", accent_color, 250, "./assets/data/wellness/social-media.csv", "", "Responses", "", "1054")
 hr.dotted
 h3 Have you ever been to Graham House or the Sykes Wellness Center to see a counselor?
 +percentage_slider("counselors", 466, 588, accent_color)
@@ -62,4 +62,4 @@ h3 Have you ever been bullied or hazed while at Andover?
 +horizontal_barchart("bullying", accent_color, 200, "./assets/data/wellness/bullying.csv", "", "Responses", "125")
 hr.dotted
 h3 Do you feel alone on campus?
-+stacked_barchart("alone", "#176f37,#176f37,#22aa60,#a6e6ae", 300, "./assets/data/wellness/alone.csv", "", "Responses", "Yes (always),Yes (regularly),Yes (sometimes)")
++horizontal_barchart("alone", accent_color, 200, "./assets/data/wellness/alone.csv", "", "Responses", "100")
