@@ -45,10 +45,9 @@
   border: 1px solid $black;
   background: white;
   padding: 5px;
-  transition: 0.2s all;
 }
 
-.tooltip-horizontal{
+/*.tooltip-horizontal{
   &:after, &:before {
     right: 100%;
   	top: 50%;
@@ -73,7 +72,7 @@
   	border-width: 11px;
   	margin-top: -11px;
   }
-}
+}*/
 
 .hidden{
   display: none;

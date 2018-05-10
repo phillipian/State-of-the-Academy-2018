@@ -227,6 +227,8 @@ function drawBarChart(currentThis, data, total){
         });
   }
 
+  var mouse;
+
   //Labels for mouseover
   svg.selectAll(".bar").on("mouseover", function(d, i){
     if(className == "barchart-grouped"){
@@ -239,17 +241,22 @@ function drawBarChart(currentThis, data, total){
     }
     tooltip.classed("hidden", false).html(tooltipText);
 
-    if(className == "barchart-grouped") tooltip.style("left", x(d.label) + x.bandwidth() * (1.0 * d.key / data[0].y.length + 1.0 / data[0].y.length) + margin.left - tooltip.node().offsetWidth / 2.0 + "px").style("top", y(d.value) - Math.round(tooltip.node().offsetHeight) + margin.top - 12 + "px");    
-    else if(className == "barchart-horizontal") tooltip.style("left", x(d.y) + marginHorizontal.left + 12 + "px").style("top", y(d.label) - y.bandwidth() / 2 + marginHorizontal.top + "px");
-    else tooltip.style("left", x(d.label) + (x.bandwidth() - tooltip.node().offsetWidth) / 4 + margin.left + "px").style("top", y(d.y) - Math.round(tooltip.node().offsetHeight) + margin.top - 12 + "px"); //TODO: for some reason this doesn't work properly
-
     if(className == "barchart-horizontal" || className == "barchart-vertical") d3.select(this).style("fill", d3.rgb(d3.color(accent).brighter(0.5)));
+
+    mouse = d3.mouse(currentThis);
+    tooltip.style("left", mouse[0] - tooltip.node().offsetWidth / 2.0 + "px")
+      .style("top", mouse[1] - tooltip.node().offsetHeight - 12 + "px");
+  })
+  .on("mousemove", function(d){
+    mouse = d3.mouse(currentThis);
+    tooltip.style("left", mouse[0] - tooltip.node().offsetWidth / 2.0 + "px")
+      .style("top", mouse[1] - tooltip.node().offsetHeight - 12 + "px");
   })
   .on("mouseout", function(d){
-    var e = d3.event.toElement;
-    if(e && e.parentNode.parentNode != this.parentNode && e.parentNode != this.parentNode && e != this.parentNode) tooltip.classed("hidden", true);
-
-    d3.select(this).style("fill", accent);
+    if(d3.event.toElement.parentNode.className.indexOf("tooltip") == -1){
+      tooltip.classed("hidden", true);
+      d3.select(this).style("fill", accent);
+    }
   });
 
   //Add x axis
