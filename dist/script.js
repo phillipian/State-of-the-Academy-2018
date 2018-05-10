@@ -253,28 +253,41 @@ function drawBarChart(currentThis, data, total){
       .style("top", mouse[1] - tooltip.node().offsetHeight - 12 + "px");
   })
   .on("mouseout", function(d){
-    if(d3.event.toElement.parentNode.className.indexOf("tooltip") == -1){
+    //if(d3.event.toElement.parentNode.className.indexOf("tooltip") == -1){
       tooltip.classed("hidden", true);
-    }
+    //}
     d3.select(this).style("fill", accent);
   });
 
-  //Add x axis
-  svg.append("g")
-    .attr("class", "xAxis")
-    .attr("transform", "translate(0," + height + ")")
-    .call(d3.axisBottom(x));
 
-  //Add y axis
-  if(isPercentageChart){
+  if(className == "barchart-horizontal"){
+    //Add x axis
     svg.append("g")
-      .attr("class", "y axis")
-      .call(d3.axisLeft(y).tickFormat(function(d) { return d + "%"; }));
-  }
-  else{
+      .attr("class", "xAxis")
+      .attr("transform", "translate(0," + height + ")")
+      .call(d3.axisBottom(x).ticks(5));
+
     svg.append("g")
       .attr("class", "y axis")
       .call(d3.axisLeft(y));
+  }
+  else{
+    //Add x axis
+    svg.append("g")
+      .attr("class", "xAxis")
+      .attr("transform", "translate(0," + height + ")")
+      .call(d3.axisBottom(x));
+
+    if(isPercentageChart){
+      svg.append("g")
+        .attr("class", "y axis")
+        .call(d3.axisLeft(y).ticks(5).tickFormat(function(d) { return d + "%"; }));
+    }
+    else{
+      svg.append("g")
+        .attr("class", "y axis")
+        .call(d3.axisLeft(y).ticks(5));
+    }
   }
 
   //Labels

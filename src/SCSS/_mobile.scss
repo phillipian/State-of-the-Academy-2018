@@ -71,6 +71,8 @@
   }
 
   #data{
+    padding: 80px 15px;
+
     #sidebar{
       position: relative;
       color: #6C7A89;
@@ -83,7 +85,7 @@
       }
 
       hr.other-hr{
-        width: calc(100% - 80px);
+        width: calc(100% - 30px);
       }
 
       h2{
@@ -94,6 +96,10 @@
         margin: 0px;
         display: block;
       }
+    }
+
+    #sections{
+      width: calc(100% - 30px);
     }
   }
 }

@@ -1,10 +1,10 @@
-10 hours or more,11
-9 hours,5
-8 hours,12
-7 hours,35
-6 hours,115
-5 hours,221
-4 hours,296
-3 hours,237
-2 hours,79
-1 hour or less,34
+>=10,11
+9,5
+8,12
+7,35
+6,115
+5,221
+4,296
+3,237
+2,79
+<=1,34

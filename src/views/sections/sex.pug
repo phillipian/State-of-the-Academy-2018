@@ -1,17 +1,17 @@
 h3 Have you ever engaged in sexual activity? 
 p <i>Note: respondents may have selected more than one</i>
 .multipane#sexual-activity(data-labels = "Everyone,2018,2019,2020,2021")
-  +vertical_barchart("sex", accent_color, 250, "./assets/data/sex/sexual-activity.csv", "", "Responses", "", "1049")
-  +vertical_barchart("sex-2018", accent_color, 250, "./assets/data/sex/sexual-activity-2018.csv", "", "Responses", "", "291")
-  +vertical_barchart("sex-2019", accent_color, 250, "./assets/data/sex/sexual-activity-2019.csv", "", "Responses", "", "285")
-  +vertical_barchart("sex-2020", accent_color, 250, "./assets/data/sex/sexual-activity-2020.csv", "", "Responses", "", "276")
-  +vertical_barchart("sex-2021", accent_color, 250, "./assets/data/sex/sexual-activity-2021.csv", "", "Responses", "", "197")
+  +vertical_barchart("sex", accent_color, 250, "./assets/data/sex/sexual-activity.csv", "Sexual act", "Responses", "", "1049")
+  +vertical_barchart("sex-2018", accent_color, 250, "./assets/data/sex/sexual-activity-2018.csv", "Sexual act", "Responses", "", "291")
+  +vertical_barchart("sex-2019", accent_color, 250, "./assets/data/sex/sexual-activity-2019.csv", "Sexual act", "Responses", "", "285")
+  +vertical_barchart("sex-2020", accent_color, 250, "./assets/data/sex/sexual-activity-2020.csv", "Sexual act", "Responses", "", "276")
+  +vertical_barchart("sex-2021", accent_color, 250, "./assets/data/sex/sexual-activity-2021.csv", "Sexual act", "Responses", "", "197")
 hr.dotted  
 h3 How many people have you engaged in sexual activity with?
 +vertical_barchart("sex-partners", accent_color, 250, "./assets/data/sex/sexual-partners.csv", "Number of Partners", "Responses")  
 hr.dotted
 h3 Relationship status by sexuality.
-+grouped_barchart("sexuality-commited-relationship", "#dd318b,#fec5e4", 300, "./assets/data/sex/sexuality-commited-relationship.csv", "", "Percentage of that sexuality", "Yes (I'm in a committed relationship),No (I'm not in a committed relationship)", "true")
++grouped_barchart("sexuality-commited-relationship", "#dd318b,#fec5e4", 300, "./assets/data/sex/sexuality-commited-relationship.csv", "", "Percentage of that sexuality", "In a committed relationship,Not in a committed relationship)", "true")
 hr.dotted
 h3 Do you consistently ask your partner for verbal consent?
 +pie_chart("consent", "394,138,517", "Yes,No,Not applicable", "#dd318b,#E854A6,#fec5e4")
@@ -61,4 +61,4 @@ h3 Have you ever watched porn?
   +percentage_slider("porn-women", 257, 300, accent_color)
 br
 h3 Porn by grade.
-+grouped_barchart("porn-grade", "#dd318b,#fec5e4", 300, "./assets/data/sex/porn-grade.csv", "Have you ever watched porn?", "Percentage of that grade", "Yes,No", "true")
++grouped_barchart("porn-grade", "#dd318b,#fec5e4", 300, "./assets/data/sex/porn-grade.csv", "", "Percentage of that grade", "Has watched porn,Has not watched porn", "true")
