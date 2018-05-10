@@ -360,7 +360,7 @@ function drawGraph(currentThis, data, total, width, height, accent, tooltip, bis
 
       for(var i = 0; i < data.length; i++) {
         if(data[i].x == x0) {
-          d = data[i];
+          d = data[i - 1];
           break;
         }
       }
