@@ -80,8 +80,9 @@ function drawBarChart(currentThis, data, total){
       .enter().append("g")
         .attr("transform", function(d) { return "translate(" + x(d.label) + ",0)"; })
       .selectAll("rect")
-      .data(function(d) { return keys.map(function(key) { return {key: key, value: d.y[key]}; });})
+      .data(function(d) { return keys.map(function(key) { return {key: key, value: d.y[key], label: d.label}; });})
       .enter().append("rect")
+        .attr("class", "bar")
         .attr("x", function(d) { return x1(d.key); })
         .attr("y", function(d) { return y(d.value); })
         .attr("width", x1.bandwidth())
@@ -158,12 +159,18 @@ function drawBarChart(currentThis, data, total){
 
   //Labels for mouseover
   svg.selectAll(".bar").on("mouseover", function(d, i){
-    if(isPercentageChart) tooltipText = "<h4>" + d.label + "</h4><p><strong>" + d.y.toFixed(1) + "%</strong></p>";
-    else tooltipText = generateTooltip({title: d.label, responses: d.y, percentage: d.y / total});
-
+    if(className == "barchart-grouped"){
+      if(isPercentageChart) tooltipText = "<h4>" + d.label + ": " + currentThis.dataset.labels.split(",")[d.key] + "</h4><p><strong>" + d.value.toFixed(1) + "%</strong></p>";
+      else tooltipText = generateTooltip({title: d.label + ": " +  currentThis.dataset.labels.split(",")[d.key], responses: d.value, percentage: d.value / total});
+    }
+    else{
+      if(isPercentageChart) tooltipText = "<h4>" + d.label + "</h4><p><strong>" + d.y.toFixed(1) + "%</strong></p>";
+      else tooltipText = generateTooltip({title: d.label, responses: d.y, percentage: d.y / total});
+    }
     tooltip.classed("hidden", false).html(tooltipText);
 
-    if(className == "barchart-horizontal") tooltip.style("left", x(d.y) + marginHorizontal.left + 12 + "px").style("top", y(d.label) - y.bandwidth() / 2 + marginHorizontal.top + "px");
+    if(className == "barchart-grouped") tooltip.style("left", x(d.label) + x.bandwidth() * (1.0 * d.key / data[0].y.length + 1.0 / data[0].y.length) + margin.left - tooltip.node().offsetWidth / 2.0 + "px").style("top", y(d.value) - Math.round(tooltip.node().offsetHeight) + margin.top - 12 + "px");    
+    else if(className == "barchart-horizontal") tooltip.style("left", x(d.y) + marginHorizontal.left + 12 + "px").style("top", y(d.label) - y.bandwidth() / 2 + marginHorizontal.top + "px");
     else tooltip.style("left", x(d.label) + (x.bandwidth() - tooltip.node().offsetWidth) / 4 + margin.left + "px").style("top", y(d.y) - Math.round(tooltip.node().offsetHeight) + margin.top - 12 + "px"); //TODO: for some reason this doesn't work properly
 
     if(className == "barchart-horizontal" || className == "barchart-vertical") d3.select(this).style("fill", d3.rgb(d3.color(accent).brighter(0.5)));
