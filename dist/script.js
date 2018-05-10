@@ -460,7 +460,7 @@ d3.selectAll(".line_chart").each(function(){
       total = 0;
 
   var colors = [];
-  for(var i = 0; i < numLines; i++) colors.push(d3.color(accent.darker(i * 1.5 - 1)));
+  for(var i = 0; i < numLines; i++) colors.push(d3.color(accent.darker(i * 1.5)));
 
   $.ajax({
     url: csv,
@@ -536,7 +536,7 @@ d3.selectAll(".map").each(function(){
     return {
       responses: element.responses,
       name: element.name,
-      color: d3.color(accent.darker(0.4 * colorSort.indexOf(element)))
+      color: d3.color(accent.darker(element.responses / total * 25))
     };
   });
 

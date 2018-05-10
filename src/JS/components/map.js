@@ -24,7 +24,7 @@ d3.selectAll(".map").each(function(){
     return {
       responses: element.responses,
       name: element.name,
-      color: d3.color(accent.darker(0.4 * colorSort.indexOf(element)))
+      color: d3.color(accent.darker(element.responses / total * 25))
     };
   });
 

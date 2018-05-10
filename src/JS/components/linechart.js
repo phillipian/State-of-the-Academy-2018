@@ -148,7 +148,7 @@ d3.selectAll(".line_chart").each(function(){
       total = 0;
 
   var colors = [];
-  for(var i = 0; i < numLines; i++) colors.push(d3.color(accent.darker(i * 1.5 - 1)));
+  for(var i = 0; i < numLines; i++) colors.push(d3.color(accent.darker(i * 1.5)));
 
   $.ajax({
     url: csv,
