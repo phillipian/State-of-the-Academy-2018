@@ -89,9 +89,11 @@ function drawBarChart(currentThis, data, total){
       x,
       y,
       svg,
-      className = currentThis.className.split(" ")[1];
+      className = currentThis.className.split(" ")[1],
+      isPercentageChart = currentThis.dataset.percent == "true";
 
   if("leftmargin" in currentThis.dataset) marginHorizontal.left = parseInt(currentThis.dataset.leftmargin);
+  else if(isPercentageChart) margin.left = 60;
 
   d3.select(currentThis).select('svg').selectAll("*").remove();
   d3.select(currentThis).select('.bar-label').remove();
@@ -138,7 +140,9 @@ function drawBarChart(currentThis, data, total){
 
     x.domain(data.map(function(d) { return d.label; }));
     x1.domain(keys).rangeRound([0, x.bandwidth()]);
-    y.domain([0, d3.max(data, function(d) { return d3.max(keys, function(key) { return d.y[key]; }); })]).nice();
+
+    if(isPercentageChart) y.domain([0, 100]);
+    else y.domain([0, d3.max(data, function(d) { return d3.max(keys, function(key) { return d.y[key]; }); })]).nice();
 
     svg.append("g")
       .selectAll("g")
@@ -196,7 +200,8 @@ function drawBarChart(currentThis, data, total){
           .attr("width", x.bandwidth());
     }
     else{
-      y.domain([0, d3.max(data, function(d) { return d.y; })]);
+      if(isPercentageChart) y.domain([0, 100]);
+      else y.domain([0, d3.max(data, function(d) { return d.y; })]);
 
       svg.selectAll(".bar")
           .data(data)
@@ -223,7 +228,9 @@ function drawBarChart(currentThis, data, total){
 
   //Labels for mouseover
   svg.selectAll(".bar").on("mouseover", function(d, i){
-    tooltipText = generateTooltip({title: d.label, responses: d.y, percentage: d.y / total});
+    if(isPercentageChart) tooltipText = "<h4>" + d.label + "</h4><p><strong>" + d.y.toFixed(1) + "%</strong></p>";
+    else tooltipText = generateTooltip({title: d.label, responses: d.y, percentage: d.y / total});
+
     tooltip.classed("hidden", false).html(tooltipText);
 
     if(className == "barchart-horizontal") tooltip.style("left", x(d.y) + marginHorizontal.left + 12 + "px").style("top", y(d.label) - y.bandwidth() / 2 + marginHorizontal.top + "px");
@@ -245,9 +252,16 @@ function drawBarChart(currentThis, data, total){
     .call(d3.axisBottom(x));
 
   //Add y axis
-  svg.append("g")
-    .attr("class", "y axis")
-    .call(d3.axisLeft(y));
+  if(isPercentageChart){
+    svg.append("g")
+      .attr("class", "y axis")
+      .call(d3.axisLeft(y).tickFormat(function(d) { return d + "%"; }));
+  }
+  else{
+    svg.append("g")
+      .attr("class", "y axis")
+      .call(d3.axisLeft(y));
+  }
 
   //Labels
   svg.append("text")
