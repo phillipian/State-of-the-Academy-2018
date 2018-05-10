@@ -5,8 +5,11 @@ h3 On average, how many hours of sleep do you get per night?
   +line_chart("chart", accent_color, 300, "Amount of sleep in hours", "Respondents", "./assets/data/wellness/sleep-2020.csv", "false", 1, "", "true")
   +line_chart("chart", accent_color, 300, "Amount of sleep in hours", "Respondents", "./assets/data/wellness/sleep-2021.csv", "false", 1, "", "true")
 hr.dotted
+h3 Do you feel insecure about your academic ability and/or intelligence?
++horizontal_barchart("insecurity-intelligence", accent_color, 200, "./assets/data/wellness/insecurity-intelligence.csv", "", "Responses", "100")
+hr.dotted
 h3 Do you feel insecure about your body, physical health, and/or appearance?
-+stacked_barchart("insecure", "#176f37,#22aa60,#a6e6ae", 300, "./assets/data/wellness/insecurity.csv", "", "Responses", "Yes (always),Yes (regularly),Yes (sometimes)")
++horizontal_barchart("insecurity-appearance", accent_color, 200, "./assets/data/wellness/insecurity-appearance.csv", "", "Responses", "100")
 hr.dotted
 h3 Insecurity about appearance by gender.
 p Note: Percentages for certain categories may be skewed do to a low amount of responses.
@@ -18,11 +21,8 @@ hr.dotted
 h3 Insecurity about appearance by race.
 p Note: Percentages for certain categories may be skewed do to a low amount of responses.
 .multipane#insecurity-race(data-labels = "Males,Females")
-  +vertical_barchart("insecurity-race-men", "#176f37", 300, "./assets/data/wellness/insecurity-race-men.csv", "Race", "Percentage per race", "true")
-  +vertical_barchart("insecurity-race-women", "#176f37", 300, "./assets/data/wellness/insecurity-race-women.csv", "Race", "Percentage per race", "true")
-hr.dotted
-h3 Do you feel insecure about your academic ability and/or intelligence?
-+stacked_barchart("insecure-intelligence", "#176f37,#22aa60,#a6e6ae", 300, "./assets/data/wellness/insecurity-intelligence.csv", "", "Responses", "Yes (always),Yes (regularly),Yes (sometimes)")
+  +vertical_barchart("insecurity-race-men", accent_color, 300, "./assets/data/wellness/insecurity-race-men.csv", "Race", "Percentage per race", "true")
+  +vertical_barchart("insecurity-race-women", accent_color, 300, "./assets/data/wellness/insecurity-race-women.csv", "Race", "Percentage per race", "true")
 hr.dotted
 h3 Have you ever been diagnosed with anxiety?
 +horizontal_barchart("anxiety", accent_color, 200, "./assets/data/wellness/anxiety.csv", "", "Responses", "150")
