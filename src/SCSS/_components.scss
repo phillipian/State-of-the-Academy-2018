@@ -139,8 +139,9 @@
 
 // ** PIE CHART **
 .pie{
-  margin: 20px auto;
+  margin: 20px 0;
   position: relative;
+  text-align: center;
   .tooltip{
     transition: none;
   }
@@ -153,7 +154,7 @@
 }
 
 .pie-label{
-  margin-top: 5px;
+  margin: 5px auto;
 }
 
 .pie-center{
