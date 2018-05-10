@@ -83,15 +83,6 @@ function drawBarChart(currentThis, data, total){
         .attr("width", x1.bandwidth())
         .attr("height", function(d) { return height - y(d.value); })
         .attr("fill", function(d, i) { return colors[i]; });
-
-    d3.select(currentThis).append("div")
-      .attr("class", "bar-label")
-      .attr("width", "100%")
-      .selectAll("p").data(currentThis.dataset.labels.split(","))
-      .enter().append("p")
-        .html(function(d, i){
-          return "<div class = 'bubble' style = 'background:" + colors[i] + "'></div>" + d;
-        });
   }
   else{
     //Set the ranges
@@ -113,8 +104,6 @@ function drawBarChart(currentThis, data, total){
       var keys = [];
       for(var i = 0; i < data[0].y.length; i++) keys.push(i);
 
-      console.log(d3.stack().keys(keys)(data));
-
       svg.append("g")
         .selectAll("g")
         .data(d3.stack().keys(keys)(data))
@@ -135,15 +124,6 @@ function drawBarChart(currentThis, data, total){
           })
           .attr("height", function(d, i) { if(index == data[0].y.length) index = 0;return height - y(d.data.y[index++]); })
           .attr("width", x.bandwidth());
-
-      d3.select(currentThis).append("div")
-        .attr("class", "bar-label")
-        .attr("width", "100%")
-        .selectAll("p").data(currentThis.dataset.labels.split(","))
-        .enter().append("p")
-          .html(function(d, i){
-            return "<div class = 'bubble' style = 'background:" + colors[i] + "'></div>" + d;
-          });
     }
     else{
       y.domain([0, d3.max(data, function(d) { return d.y; })]);
@@ -158,6 +138,17 @@ function drawBarChart(currentThis, data, total){
           .attr("y", function(d) { return y(d.y); })
           .attr("height", function(d) { return height - y(d.y); });
     }
+  }
+
+  if(currentThis.dataset.labels){
+    d3.select(currentThis).append("div")
+      .attr("class", "bar-label")
+      .attr("width", "100%")
+      .selectAll("p").data(currentThis.dataset.labels.split(","))
+      .enter().append("p")
+        .html(function(d, i){
+          return "<div class = 'bubble' style = 'background:" + (colors[i] || accent)+ "'></div>" + d;
+        });
   }
 
   //Labels for mouseover

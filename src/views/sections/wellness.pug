@@ -5,7 +5,20 @@ h3 Sleep by class.
 hr.dotted
 h3 Do you feel insecure about your body, physical health, and/or appearance?
 +stacked_barchart("insecure", "#176f37,#22aa60,#a6e6ae", 300, "./assets/data/wellness/insecurity.csv", "", "Responses", "Yes (always),Yes (regularly),Yes (sometimes)")
+hr.dotted
+h3 Insecurity about appearance by gender.
+p Note: Percentages for certain categories may be skewed do to a low amount of responses.
++text_fact("59.83%", "of men have felt insecure about their appearance")
++text_fact("89.66%", "of women have felt insecure about their appearance")
 br
++grouped_barchart("insecurity-gender", "#176f37,#22aa60,#a6e6ae,#cbffd1", 300, "./assets/data/wellness/insecurity-gender.csv", "Gender", "Percentage per gender", "Always insecure,Regularly insecure,Sometimes insecure,Never insecure")
+hr.dotted
+h3 Insecurity about appearance by race.
+p Note: Percentages for certain categories may be skewed do to a low amount of responses.
+.multipane#insecurity-race(data-labels = "Males,Females")
+  +vertical_barchart("insecurity-race-men", "#176f37", 300, "./assets/data/wellness/insecurity-race-men.csv", "Race", "Percentage per race")
+  +vertical_barchart("insecurity-race-women", "#176f37", 300, "./assets/data/wellness/insecurity-race-women.csv", "Race", "Percentage per race")
+hr.dotted
 h3 Do you feel insecure about your academic ability and/or intelligence?
 +stacked_barchart("insecure-intelligence", "#176f37,#22aa60,#a6e6ae", 300, "./assets/data/wellness/insecurity-intelligence.csv", "", "Responses", "Yes (always),Yes (regularly),Yes (sometimes)")
 hr.dotted
