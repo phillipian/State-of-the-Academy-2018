@@ -25,3 +25,36 @@ h3 Do you think that the majority of your teachers care about your health and we
 hr.dotted
 h3 Has attending Andover affected your relationship with your family?
 +pie_chart("relationship-parents", "422,352,271", "Yes (positively),Yes (negatively),No", "#14195C,#353f9a,#6d75b8")
+hr.dotted
+h3 Have you ever considered leaving Andover permanently?
++percentage_slider("leaving-permanently", 467, 578, accent_color)
+hr.dotted
+h3 Would you want your children to attend Andover?
++percentage_slider("children-attend", 773, 272, accent_color)
+hr.dotted
+h3 Is the faculty diverse enough?
+.percentage-with-label
+  .label(style = "width: 150px;")
+    h4 Everyone:
+  +percentage_slider("faculty-diverse", 616, 428, accent_color)
+br
+.percentage-with-label
+  .label(style = "width: 150px;")
+    h4 White:
+  +percentage_slider("faculty-diverse-white", 433, 215, accent_color)
+.percentage-with-label
+  .label(style = "width: 150px;")
+    h4 Asian:
+  +percentage_slider("faculty-diverse-asian", 205, 155, accent_color)
+.percentage-with-label
+  .label(style = "width: 150px;")
+    h4 Black:
+  +percentage_slider("faculty-diverse-black", 21, 90, accent_color)
+.percentage-with-label
+  .label(style = "width: 150px;")
+    h4 Native American:
+  +percentage_slider("faculty-diverse-native-american", 11, 30, accent_color)
+.percentage-with-label
+  .label(style = "width: 150px;")
+    h4 Pacific Islander:
+  +percentage_slider("faculty-diverse-pacific-islander", 8, 5, accent_color)
