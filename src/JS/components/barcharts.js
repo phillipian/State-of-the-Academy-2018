@@ -2,8 +2,9 @@
   Bar Chart
 */
 
-var dataForBarCharts = [],
-    totalForBarCharts = [];
+var barChartLength = d3.selectAll(".barchart").size(),
+    dataForBarCharts = new Array(barChartLength),
+    totalForBarCharts = new Array(barChartLength);
 
 function drawBarChart(currentThis, data, total){
   var margin = {top: 20, right: 20, bottom: 50, left: 50},
@@ -243,7 +244,7 @@ function drawBarChart(currentThis, data, total){
     .style("font-size", "12px");
 }
 
-var barCharts = d3.selectAll(".barchart").each(function(){
+var barCharts = d3.selectAll(".barchart").each(function(d, i){
   var currentThis = this;
   $.ajax({
     url: this.dataset.url,
@@ -264,8 +265,8 @@ var barCharts = d3.selectAll(".barchart").each(function(){
       });
 
       d3.select(currentThis).append("svg");
-      dataForBarCharts.push(data);
-      totalForBarCharts.push(total);
+      dataForBarCharts[i] = data;
+      totalForBarCharts[i] = total;
       drawBarChart(currentThis, data, total);
     },
     dataType: "text"

@@ -2,11 +2,12 @@
   Line Chart
 */
 var margin = {top: 20, right: 20, bottom: 50, left: 50};
-var dataForGraphs = [],
-    totalForGraphs = [],
-    bisectors = [],
-    colorsForGraphs = [],
-    numLinesGraphs = [];
+var graphLength = d3.selectAll(".line_chart").size()
+    dataForGraphs = new Array(graphLength),
+    totalForGraphs = new Array(graphLength),
+    bisectors = new Array(graphLength),
+    colorsForGraphs = new Array(graphLength),
+    numLinesGraphs = new Array(graphLength);
 
 function drawGraph(currentThis, data, total, width, height, accent, tooltip, bisector, xLabel, yLabel, scatter, numLines, colors, shade){
   var x = d3.scalePoint().rangeRound([0, width]).padding(0.1);
@@ -133,7 +134,7 @@ function drawGraph(currentThis, data, total, width, height, accent, tooltip, bis
     .text(xLabel);
 }
 
-d3.selectAll(".line_chart").each(function(){
+d3.selectAll(".line_chart").each(function(d, i){
   var accent = d3.color(this.dataset.accent),
       thisNode = d3.select(this),
       currentElement = this,
@@ -169,11 +170,11 @@ d3.selectAll(".line_chart").each(function(){
 
       var bisector = d3.bisector(function(d) { return d.x; }).right;
 
-      dataForGraphs.push(data);
-      totalForGraphs.push(total);
-      bisectors.push(bisector);
-      numLinesGraphs.push(numLines);
-      colorsForGraphs.push(colors);
+      dataForGraphs[i] = data;
+      totalForGraphs[i] = total;
+      bisectors[i] = bisector;
+      numLinesGraphs[i] = numLines;
+      colorsForGraphs[i] = colors;
 
       var width = d3.select("#sections").node().offsetWidth - margin.left - margin.right,
           height = parseInt(currentElement.dataset.height) - margin.top - margin.bottom;
