@@ -2,7 +2,7 @@
   Line Chart
 */
 var margin = {top: 20, right: 20, bottom: 50, left: 50};
-var graphLength = d3.selectAll(".line_chart").size()
+var graphLength = d3.selectAll(".line_chart").size(),
     dataForGraphs = new Array(graphLength),
     totalForGraphs = new Array(graphLength),
     bisectors = new Array(graphLength),
@@ -31,6 +31,7 @@ function drawGraph(currentThis, data, total, width, height, accent, tooltip, bis
   thisNode.select('svg').selectAll("*").remove();
 
   //x.domain([xExtent[0] - (xRange * 0.05), xExtent[1] + (xRange * 0.05)]);
+  // x.domain(data.map(function(d) { return "" + d.x; }));
   x.domain(data.map(function(d) { return "" + d.x; }));
   y.domain([0, d3.max(data, function(d) { return d3.max(d.y); })]);
   x.invert = d3.scaleQuantize().domain(x.range()).range(x.domain());
@@ -134,7 +135,7 @@ function drawGraph(currentThis, data, total, width, height, accent, tooltip, bis
     .text(xLabel);
 }
 
-d3.selectAll(".line_chart").each(function(d, i){
+d3.selectAll(".line_chart").each(function(d, index){
   var accent = d3.color(this.dataset.accent),
       thisNode = d3.select(this),
       currentElement = this,
@@ -170,11 +171,11 @@ d3.selectAll(".line_chart").each(function(d, i){
 
       var bisector = d3.bisector(function(d) { return d.x; }).right;
 
-      dataForGraphs[i] = data;
-      totalForGraphs[i] = total;
-      bisectors[i] = bisector;
-      numLinesGraphs[i] = numLines;
-      colorsForGraphs[i] = colors;
+      dataForGraphs[index] = data;
+      totalForGraphs[index] = total;
+      bisectors[index] = bisector;
+      numLinesGraphs[index] = numLines;
+      colorsForGraphs[index] = colors;
 
       var width = d3.select("#sections").node().offsetWidth - margin.left - margin.right,
           height = parseInt(currentElement.dataset.height) - margin.top - margin.bottom;
